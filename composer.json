@@ -23,7 +23,8 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "~2.7",
-    "codeception/codeception": "~2.2"
+    "codeception/codeception": "~2.2",
+    "eaglewu/swoole-ide-helper:dev-maste": "~2.2",
   },
   "autoload-dev": {
     "psr-4": {
