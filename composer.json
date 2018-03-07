@@ -1,30 +1,25 @@
 {
-  "name": "codeception/phalcon-demo",
+  "name": "TT framework",
   "type": "project",
-  "description": "Phalcon Demo Application to demonstrate basics of Codeception testing.",
+  "description": "The fastest PHP framework we can used",
   "keywords": [
-    "codeception",
+    "TT",
     "phalcon",
-    "demo"
+    "swoole"
   ],
-  "homepage": "https://github.com/Codeception/phalcon-demo",
+  "homepage": "https://github.com/ycman/TT",
   "license": "BSD-3-Clause",
   "authors": [
     {
-      "name": "Phalcon Team",
-      "email": "team@phalconphp.com",
-      "homepage": "https://phalconphp.com/en/team"
-    },
-    {
-      "name": "Codeception Team",
-      "email": "team@codeception.com",
-      "homepage": "http://codeception.com/"
+      "name": "ycman",
+      "email": "",
+      "homepage": "https://github.com/ycman"
     }
-
   ],
   "require": {
     "php": ">=5.4",
-    "ext-phalcon": ">=2.0.9"
+    "ext-phalcon": ">=2.0.9",
+    "ext-swoole": ">=1.9"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "~2.7",
