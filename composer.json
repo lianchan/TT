@@ -1,0 +1,38 @@
+{
+  "name": "codeception/phalcon-demo",
+  "type": "project",
+  "description": "Phalcon Demo Application to demonstrate basics of Codeception testing.",
+  "keywords": [
+    "codeception",
+    "phalcon",
+    "demo"
+  ],
+  "homepage": "https://github.com/Codeception/phalcon-demo",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Phalcon Team",
+      "email": "team@phalconphp.com",
+      "homepage": "https://phalconphp.com/en/team"
+    },
+    {
+      "name": "Codeception Team",
+      "email": "team@codeception.com",
+      "homepage": "http://codeception.com/"
+    }
+
+  ],
+  "require": {
+    "php": ">=5.4",
+    "ext-phalcon": ">=2.0.9"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "~2.7",
+    "codeception/codeception": "~2.2"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Test\\Unit\\": "tests/unit/"
+    }
+  }
+}
