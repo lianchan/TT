@@ -12,10 +12,10 @@ use Phalcon\Mvc\Model\Metadata\Memory as MetaData;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Events\Manager as EventsManager;
-use PhalconDemo\Library\Elements;
-use PhalconDemo\Plugins\NotFoundPlugin;
-use PhalconDemo\Plugins\Acl\Resource;
-use PhalconDemo\Plugins\Acl\SecurityPlugin;
+use TTDemo\Library\Elements;
+use TTDemo\Plugins\NotFoundPlugin;
+use TTDemo\Plugins\Acl\Resource;
+use TTDemo\Plugins\Acl\SecurityPlugin;
 use Phalcon\Mvc\Router;
 
 /**
@@ -46,7 +46,7 @@ $di->setShared('dispatcher', function () use ($di, $eventsManager) {
 
     $dispatcher = new Dispatcher;
 
-    $dispatcher->setDefaultNamespace('PhalconDemo\Controllers');
+    $dispatcher->setDefaultNamespace('TTDemo\Controllers');
     $dispatcher->setEventsManager($eventsManager);
 
     return $dispatcher;

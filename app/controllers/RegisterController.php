@@ -1,9 +1,9 @@
 <?php
 
-namespace PhalconDemo\Controllers;
+namespace TTDemo\Controllers;
 
-use PhalconDemo\Forms\RegisterForm;
-use PhalconDemo\Models\Users;
+use TTDemo\Forms\RegisterForm;
+use TTDemo\Models\Users;
 use Phalcon\Db\RawValue;
 
 /**

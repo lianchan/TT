@@ -36,7 +36,7 @@ class UserSteps
     {
         $I = $this->tester;
 
-        return $I->haveRecord('PhalconDemo\Models\Users', $this->formFields);
+        return $I->haveRecord('TTDemo\Models\Users', $this->formFields);
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace PhalconDemo\Forms;
+namespace TTDemo\Forms;
 
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Select;
-use PhalconDemo\Models\ProductTypes;
+use TTDemo\Models\ProductTypes;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Numericality;
 

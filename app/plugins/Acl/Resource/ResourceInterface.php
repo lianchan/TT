@@ -1,6 +1,6 @@
 <?php
 
-namespace PhalconDemo\Plugins\Acl\Resource;
+namespace TTDemo\Plugins\Acl\Resource;
 
 interface ResourceInterface
 {

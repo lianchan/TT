@@ -1,6 +1,6 @@
 <?php
 
-namespace PhalconDemo\Models;
+namespace TTDemo\Models;
 
 use Phalcon\Mvc\Model;
 use Phalcon\Validation;

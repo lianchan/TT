@@ -1,6 +1,6 @@
 <?php
 
-namespace PhalconDemo\Controllers;
+namespace TTDemo\Controllers;
 
 class IndexController extends ControllerBase
 {

@@ -1,4 +1,4 @@
-[ ] swoole ide helper
+[] swoole ide helper
 
 github
 

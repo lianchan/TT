@@ -1,6 +1,6 @@
 <?php
 
-namespace PhalconDemo\Library;
+namespace TTDemo\Library;
 
 use Phalcon\Mvc\User\Component;
 

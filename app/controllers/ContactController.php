@@ -1,9 +1,9 @@
 <?php
 
-namespace PhalconDemo\Controllers;
+namespace TTDemo\Controllers;
 
-use PhalconDemo\Forms\ContactForm;
-use PhalconDemo\Models\Contact;
+use TTDemo\Forms\ContactForm;
+use TTDemo\Models\Contact;
 
 /**
  * ContactController

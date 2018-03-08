@@ -1,11 +1,11 @@
 <?php
 
-namespace PhalconDemo\Controllers;
+namespace TTDemo\Controllers;
 
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
-use PhalconDemo\Forms\CompaniesForm;
-use PhalconDemo\Models\Companies;
+use TTDemo\Forms\CompaniesForm;
+use TTDemo\Models\Companies;
 
 class CompaniesController extends ControllerBase
 {
@@ -33,7 +33,7 @@ class CompaniesController extends ControllerBase
     {
         $numberPage = 1;
         if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'PhalconDemo\Models\Companies', $this->request->getPost());
+            $query = Criteria::fromInput($this->di, 'TTDemo\Models\Companies', $this->request->getPost());
             $this->persistent->set('searchParams', $query->getParams());
         } else {
             $numberPage = $this->request->getQuery("page", "int");

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhalconDemo\Plugins;
+namespace TTDemo\Plugins;
 
 use Phalcon\Dispatcher;
 use Phalcon\Events\Event;

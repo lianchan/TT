@@ -1,8 +1,8 @@
 <?php
 
-namespace PhalconDemo\Controllers;
+namespace TTDemo\Controllers;
 
-use PhalconDemo\Models\Users;
+use TTDemo\Models\Users;
 
 class ProfileController extends ControllerBase
 {

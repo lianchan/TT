@@ -1,8 +1,8 @@
 <?php
 
-namespace PhalconDemo\Plugins\Acl;
+namespace TTDemo\Plugins\Acl;
 
-use PhalconDemo\Plugins\Acl\Resource\ResourceInterface;
+use TTDemo\Plugins\Acl\Resource\ResourceInterface;
 
 class Resource implements ResourceInterface
 {

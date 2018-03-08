@@ -4,7 +4,7 @@ namespace App\Test\Unit\Models;
 
 use UnitTester;
 use Codeception\Test\Unit;
-use PhalconDemo\Models\Users;
+use TTDemo\Models\Users;
 
 class UsersTest extends Unit
 {
