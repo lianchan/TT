@@ -12,7 +12,7 @@
   "authors": [
     {
       "name": "ycman",
-      "email": "",
+      "email": "yangcai.email@gmail.com",
       "homepage": "https://github.com/ycman"
     }
   ],
@@ -24,7 +24,8 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "~2.7",
     "codeception/codeception": "~2.2",
-    "eaglewu/swoole-ide-helper:dev-maste": "~2.2",
+    "phalcon/ide-stubs": "*",
+    "eaglewu/swoole-ide-helper": "dev-master"
   },
   "autoload-dev": {
     "psr-4": {
