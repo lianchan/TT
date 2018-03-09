@@ -28,14 +28,14 @@ class ErrorHandler  implements ErrorHandlerInterface
         if(Request::getInstance()){
             Response::getInstance()->write($msg ." in file {$file} line {$line}");
         }else{
-            Logger::getInstance('error')->console($msg." in file {$file} line {$line}",false);
+//            Logger::getInstance('error')->console($msg." in file {$file} line {$line}",false);
         }
     }
 
     function log($msg,$file = null,$line = null,$errorCode = null, $trace)
     {
         // TODO: Implement log() method.
-        Logger::getInstance('error')->log($msg." in file {$file} line {$line}");
+//        Logger::getInstance('error')->log($msg." in file {$file} line {$line}");
     }
 
 }

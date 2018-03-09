@@ -8,7 +8,6 @@
 
 namespace TT\Core\Swoole;
 
-
 use TT\Conf\Event;
 use TT\Core\AbstractInterface\AbstractAsyncTask;
 use TT\Core\AbstractInterface\HttpExceptionHandlerInterface;
@@ -70,6 +69,7 @@ class Server
         $this->workerStartEvent();
         $this->workerStopEvent();
         if($conf->getServerType() != Config::SERVER_TYPE_SERVER){
+            var_dump($conf->getServerType());
             $this->listenRequest();
         }
         $this->isStart = 1;
@@ -89,7 +89,18 @@ class Server
     private function listenRequest(){
         $this->getServer()->on("request",
             function (\swoole_http_request $request,\swoole_http_response $response){
-            $request2 = Request::getInstance($request);
+
+            var_dump('master_pid --> '.$this->swooleServer->master_pid);
+            var_dump('manager_pid --> '.$this->swooleServer->manager_pid);
+            var_dump('worker_id --> '.$this->swooleServer->worker_id);
+            var_dump('taskworker --> '.$this->swooleServer->taskworker);
+            var_dump('connections --> '.$this->swooleServer->connections);
+            var_dump('ports --> ');
+            var_dump($this->swooleServer->ports);
+            var_dump('fd --> '.$this->swooleServer->fd);
+
+
+                $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
             try{
                 Event::getInstance()->onRequest($request2,$response2);

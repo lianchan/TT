@@ -81,6 +81,7 @@ class Event extends AbstractEvent
 
     function onRequest(Request $request, Response $response)
     {
+        var_dump('get -------> '.$request->get);
         // TODO: Implement onRequest() method.
     }
 

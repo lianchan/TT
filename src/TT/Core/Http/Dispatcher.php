@@ -42,8 +42,9 @@ class Dispatcher
             return;
         }
         $pathInfo = UrlParser::pathInfo();
-        var_dump($pathInfo);
         $routeInfo = $this->doFastRouter($pathInfo,Request::getInstance()->getMethod());
+        var_dump($pathInfo, $routeInfo);
+
         if(false !== $routeInfo){
             switch ($routeInfo[0]) {
                 case \FastRoute\Dispatcher::NOT_FOUND:
