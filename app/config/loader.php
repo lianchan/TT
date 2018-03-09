@@ -11,7 +11,6 @@ $loader = new Loader;
 
 $loader->registerNamespaces(
     [
-        'TT'                 => DOCROOT . $config->get('application')->baseUri . '/src',
         'TTDemo\Controllers' => DOCROOT . $config->get('application')->controllersDir,
         'TTDemo\Forms'       => DOCROOT . $config->get('application')->formsDir,
         'TTDemo\Models'      => DOCROOT . $config->get('application')->modelsDir,

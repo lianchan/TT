@@ -6,16 +6,16 @@
  * Time: 上午12:06
  */
 
-namespace Conf;
+namespace TT\Conf;
 
-use Core\AbstractInterface\AbstractEvent;
-use Core\Component\Di;
-use Core\Component\Version\Control;
-use Core\Http\Request;
-use Core\Http\Response;
-use Core\AutoLoader;
-use Core\Db\MysqliDb;
-use Core\Db\RedisDb;
+use TT\Core\AbstractInterface\AbstractEvent;
+use TT\Core\Component\Di;
+use TT\Core\Component\Version\Control;
+use TT\Core\Http\Request;
+use TT\Core\Http\Response;
+use TT\Core\AutoLoader;
+use TT\Core\Db\MysqliDb;
+use TT\Core\Db\RedisDb;
 
 
 class Event extends AbstractEvent
@@ -26,25 +26,21 @@ class Event extends AbstractEvent
         date_default_timezone_set('Asia/Shanghai');
 
         // MysqliDb loader
-        AutoLoader::getInstance()->requireFile("App/Vendor/Db/MysqliDb.php");
+//        AutoLoader::getInstance()->requireFile("App/Vendor/Db/MysqliDb.php");
 
         // composer loader
-        AutoLoader::getInstance()->requireFile('vendor/autoload.php');
+//        AutoLoader::getInstance()->requireFile('vendor/autoload.php');
     }
 
     function frameInitialized()
     {
-        // mysql
-        $mysqlConfig = Config::getInstance()->getConf('MYSQL');
-        Di::getInstance()->set('MYSQL', MysqliDb::class, $mysqlConfig);
+//        // mysql
+//        $mysqlConfig = Config::getInstance()->getConf('MYSQL');
+//        Di::getInstance()->set('MYSQL', MysqliDb::class, $mysqlConfig);
 
-        // redis
-        $redisConfig = Config::getInstance()->getConf("REDIS");
-        Di::getInstance()->set('REDIS', RedisDb::class, $redisConfig);
-
-//        // 初始化数据库
-//        $dbConf = Config::getInstance()->getConf('database');
-//        \think\Db::setConfig($dbConf);
+//        // redis
+//        $redisConfig = Config::getInstance()->getConf("REDIS");
+//        Di::getInstance()->set('REDIS', RedisDb::class, $redisConfig);
     }
 
     function beforeWorkerStart(\swoole_server $server)
@@ -52,13 +48,13 @@ class Event extends AbstractEvent
         // TODO: Implement beforeWorkerStart() method.
 
         // 直播
-        // \Conf\Live::getInstance()->beforeWorkerStart($server);
+        // \TT\Conf\Live::getInstance()->beforeWorkerStart($server);
 
         // WebSocket
-        \Conf\WebSocket::getInstance()->beforeWorkerStart($server);
+//        \TT\Conf\WebSocket::getInstance()->beforeWorkerStart($server);
 
         // WebSocketCommandParser
-        // \Conf\WebSocketCommandParser::getInstance()->beforeWorkerStart($server);
+        // \TT\Conf\WebSocketCommandParser::getInstance()->beforeWorkerStart($server);
     }
 
     function onStart(\swoole_server $server)
@@ -76,7 +72,7 @@ class Event extends AbstractEvent
         // TODO: Implement onWorkerStart() method.
 
         // WebSocketCommandParser
-        // \Conf\WebSocketCommandParser::getInstance()->onWorkerStart($server, $workerId);
+        // \TT\Conf\WebSocketCommandParser::getInstance()->onWorkerStart($server, $workerId);
 
         $this->_hotReload($server, $workerId);
     }
@@ -125,7 +121,7 @@ class Event extends AbstractEvent
             });
         }
 
-        // $pidFile = \Conf\Config::getInstance()->getConf("SERVER.CONFIG.pid_file");
+        // $pidFile = \TT\Conf\TT\Config::getInstance()->getTT\Conf("SERVER.CONFIG.pid_file");
         // // echo $pidFile;
         // if(!file_exists($pidFile)){
         //     echo "pid file :{$pidFile} not exist \n";
