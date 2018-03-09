@@ -177,7 +177,7 @@ function stopServer($options){
     $time = time();
     while (true){
         usleep(1000);
-        if(swoole_process::kill($pid,0)){
+        if(!swoole_process::kill($pid,0)){
             echo 'server stop at '.date('y-m-d h:i:s').PHP_EOL;
             if(is_file($pidFile)){
                 unlink($pidFile);
@@ -269,10 +269,10 @@ function help($options){
 }
 
 function evenCheck(){
-    if(phpversion() < 5.6){
+    if(version_compare(phpversion(),'5.6','<')){
         die("php version must >= 5.6");
     }
-    if(phpversion('swoole') < 1.9){
+    if(version_compare(phpversion('swoole'),'1.9.5','<')){
         die("swoole version must >= 1.9.5");
     }
 }
