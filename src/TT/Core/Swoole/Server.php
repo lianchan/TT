@@ -95,12 +95,10 @@ class Server
             var_dump('worker_id --> '.$this->swooleServer->worker_id);
             var_dump('taskworker --> '.$this->swooleServer->taskworker);
             var_dump('connections --> '.$this->swooleServer->connections);
-            var_dump('ports --> ');
-            var_dump($this->swooleServer->ports);
-            var_dump('fd --> '.$this->swooleServer->fd);
+//            var_dump('ports --> ');
+//            var_dump($this->swooleServer->ports);
 
-
-                $request2 = Request::getInstance($request);
+            $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
             try{
                 Event::getInstance()->onRequest($request2,$response2);

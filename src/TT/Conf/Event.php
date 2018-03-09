@@ -71,7 +71,7 @@ class Event extends AbstractEvent
         // WebSocketCommandParser
         // \TT\Conf\WebSocketCommandParser::getInstance()->onWorkerStart($server, $workerId);
 
-        $this->_hotReload($server, $workerId);
+//        $this->_hotReload($server, $workerId);
     }
 
     function onWorkerStop(\swoole_server $server, $workerId)
@@ -81,7 +81,9 @@ class Event extends AbstractEvent
 
     function onRequest(Request $request, Response $response)
     {
-        var_dump('get -------> '.$request->get);
+        var_dump('get -------> ');
+        var_dump($request->getSwooleRequest()->get);
+        var_dump('fd -------> '.$request->getSwooleRequest()->fd);
         // TODO: Implement onRequest() method.
     }
 
