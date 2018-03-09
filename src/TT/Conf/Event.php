@@ -10,12 +10,9 @@ namespace TT\Conf;
 
 use TT\Core\AbstractInterface\AbstractEvent;
 use TT\Core\Component\Di;
-use TT\Core\Component\Version\Control;
 use TT\Core\Http\Request;
 use TT\Core\Http\Response;
 use TT\Core\AutoLoader;
-use TT\Core\Db\MysqliDb;
-use TT\Core\Db\RedisDb;
 
 
 class Event extends AbstractEvent
@@ -116,8 +113,8 @@ class Event extends AbstractEvent
     {
 
         if ($workerId == 0) {
-            \Core\Swoole\Timer::loop(3000, function(){
-                \Core\Swoole\Server::getInstance()->getServer()->reload();
+            \TT\Core\Swoole\Timer::loop(3000, function(){
+                \TT\Core\Swoole\Server::getInstance()->getServer()->reload();
             });
         }
 

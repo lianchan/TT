@@ -9,10 +9,10 @@
 namespace TT\Core\Component\Error;
 
 
-use Conf\Config;
+use TT\Conf\Config;
 use TT\Core\AbstractInterface\ErrorHandlerInterface;
 use TT\Core\AbstractInterface\ExceptionHandlerInterface;
-use TT\Core\Component\Di;
+use TT\Core\Component\DI;
 use TT\Core\Component\SysConst;
 
 class Trigger
@@ -22,7 +22,7 @@ class Trigger
         if($trace == null){
             $trace = debug_backtrace();
         }
-        $handler = Di::getInstance()->get(SysConst::ERROR_HANDLER);
+        $handler = DI::getInstance()->get(SysConst::ERROR_HANDLER);
         if(!$handler instanceof ErrorHandlerInterface){
             $handler = new ErrorHandler();
         }
@@ -37,7 +37,7 @@ class Trigger
 
     public static function exception(\Exception $exception){
         $conf = Config::getInstance()->getConf("DEBUG");
-        $handler = Di::getInstance()->get(SysConst::EXCEPTION_HANDLER);
+        $handler = DI::getInstance()->get(SysConst::EXCEPTION_HANDLER);
         if(!$handler instanceof ExceptionHandlerInterface){
             $handler = new ExceptionHandler();
         }

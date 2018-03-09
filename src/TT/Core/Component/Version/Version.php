@@ -62,8 +62,4 @@ class Version
     {
         return $this->defaultHandler;
     }
-
-
-
-
 }

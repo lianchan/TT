@@ -7,8 +7,6 @@
  * Time: 下午9:46
  */
 
-define('DOCROOT', dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR);
-
 require_once 'Core/Core.php';
 $server = TT\Core\Core::getInstance()->frameWorkInitialize();
 function commandParser(){
@@ -47,21 +45,21 @@ function commandHandler(){
             reloadServer($command['options']);
             break;
         }
-        case 'update':{
-            echo "start download".PHP_EOL;
-            exec('curl -sS -o master.tar.gz https://codeload.github.com/kiss291323003/easyswoole/tar.gz/master');
-            echo "download success".PHP_EOL;
-            exec('tar -xzvf master.tar.gz');
-            exec('rm -rf ./Core');
-            exec('rm -rf ./server');
-            exec('mv ./easyswoole-master/src/Core ./');
-            exec('mv ./easyswoole-master/src/server ./');
-            exec('rm -rf ./easyswoole-master master.tar.gz');
-            echo "update success".PHP_EOL;
-            break;
-        }
+//        case 'update':{
+//            echo "start download".PHP_EOL;
+//            exec('curl -sS -o master.tar.gz https://codeload.github.com/kiss291323003/easyswoole/tar.gz/master');
+//            echo "download success".PHP_EOL;
+//            exec('tar -xzvf master.tar.gz');
+//            exec('rm -rf ./Core');
+//            exec('rm -rf ./server');
+//            exec('mv ./easyswoole-master/src/Core ./');
+//            exec('mv ./easyswoole-master/src/server ./');
+//            exec('rm -rf ./easyswoole-master master.tar.gz');
+//            echo "update success".PHP_EOL;
+//            break;
+//        }
         case 'version':{
-            echo \Core\Component\Di::getInstance()->get(\Core\Component\SysConst::VERSION);
+            echo TT\Core\Component\DI::getInstance()->get(TT\Core\Component\SysConst::VERSION);
             echo PHP_EOL;
             break;
         }
@@ -75,18 +73,18 @@ function commandHandler(){
 
 function startServer($options){
     $logo = '
-                 _______________
-                 ___  __/__  __/
-                 __  /  __  /   
-                 _  /   _  /    
-                 /_/    /_/              
-                                         Thanks Swoole and Phalcon.
-  _.------------------------------------------------------------------._
+               _______________
+               ___  __/__  __/
+               __  /  __  /   
+               _  /   _  /    
+               /_/    /_/              
+                                       Thanks Swoole and Phalcon.
+_.------------------------------------------------------------------._
 ';
     echo $logo.PHP_EOL;
     opCacheClear();
     global $server;
-    $conf = \Conf\Config::getInstance();
+    $conf = TT\Conf\Config::getInstance();
     if(isset($options['ip'])){
         $conf->setConf("SERVER.LISTEN",$options['ip']);
     }
@@ -99,61 +97,65 @@ function startServer($options){
 
     if(!empty($options['pid'])){
         $pidFile = $options['pid'];
-        \Conf\Config::getInstance()->setConf("SERVER.CONFIG.pid_file",$pidFile);
+        TT\Conf\Config::getInstance()->setConf('SERVER.CONFIG.pid_file',$pidFile);
     }
 
     if(isset($options['workerNum'])){
-        $conf->setConf("SERVER.CONFIG.worker_num",$options['workerNum']);
+        $conf->setConf('SERVER.CONFIG.worker_num',$options['workerNum']);
     }
     echo 'worker num           '.$conf->getConf('SERVER.CONFIG.worker_num').PHP_EOL;
 
     if(isset($options['taskWorkerNum'])){
-        $conf->setConf("SERVER.CONFIG.task_worker_num",$options['taskWorkerNum']);
+        $conf->setConf('SERVER.CONFIG.task_worker_num',$options['taskWorkerNum']);
     }
     echo 'task worker num      '.$conf->getConf('SERVER.CONFIG.task_worker_num').PHP_EOL;
     if(isset($options['user'])){
         $conf->setConf("SERVER.CONFIG.user",$options['user']);
     }
-    echo 'user             '.$conf->getConf('SERVER.CONFIG.user').PHP_EOL;
+    echo 'user                 '.$conf->getConf('SERVER.CONFIG.user').PHP_EOL;
 
     if(isset($options['group'])){
         $conf->setConf("SERVER.CONFIG.group",$options['group']);
     }
-    echo 'user group            '.$conf->getConf('SERVER.CONFIG.group').PHP_EOL;
+    echo 'user group           '.$conf->getConf('SERVER.CONFIG.group').PHP_EOL;
+
     if(isset($options['cpuAffinity'])){
         $conf->setConf("SERVER.CONFIG.open_cpu_affinity",true);
     }
     $label = 'false';
     if(isset($options['d'])){
-        $conf->setConf("SERVER.CONFIG.daemonize",true);
+        $conf->setConf('SERVER.CONFIG.daemonize',true);
         $label = 'true';
     }else{
-        \Conf\Config::getInstance()->setConf("SERVER.CONFIG.pid_file",null);
+        TT\Conf\Config::getInstance()->setConf('SERVER.CONFIG.pid_file',null);
     }
     echo "daemonize            {$label} ".PHP_EOL;
+
     $label = 'false';
     if($conf->getConf('DEBUG.ENABLE')){
          $label = 'true';
     }
     echo 'debug enable         '.$label.PHP_EOL;
+
     $label = 'false';
     if($conf->getConf('DEBUG.LOG')){
              $label = 'true';
     }
     echo 'debug log error      '.$label.PHP_EOL;
+
     $label = 'false';
     if($conf->getConf('DEBUG.DISPLAY_ERROR')){
-                 $label = 'true';
+        $label = 'true';
     }
     echo 'debug display error  '.$label.PHP_EOL;
     echo 'swoole version       '.phpversion('swoole').PHP_EOL;
-    echo 'easyswoole version   '.\Core\Component\Di::getInstance()->get(Core\Component\SysConst::VERSION).PHP_EOL;
+    echo 'TT version           '.\TT\Core\Component\Di::getInstance()->get(\TT\Core\Component\SysConst::VERSION).PHP_EOL;
     $server->run();
 
 }
 
 function stopServer($options){
-    $pidFile = \Conf\Config::getInstance()->getConf("SERVER.CONFIG.pid_file");
+    $pidFile = TT\Conf\Config::getInstance()->getConf('SERVER.CONFIG.pid_file');
     if(!empty($options['pid'])){
         $pidFile = $options['pid'];
     }
@@ -176,14 +178,14 @@ function stopServer($options){
     while (true){
         usleep(1000);
         if(swoole_process::kill($pid,0)){
-            echo "server stop at ".date("y-m-d h:i:s").PHP_EOL;
+            echo 'server stop at '.date('y-m-d h:i:s').PHP_EOL;
             if(is_file($pidFile)){
                 unlink($pidFile);
             }
             break;
         }else{
             if(time() - $time > 2){
-                echo "stop server fail.try --force again ".PHP_EOL;
+                echo 'stop server fail.try --force again '.PHP_EOL;
                 break;
             }
         }
@@ -191,7 +193,7 @@ function stopServer($options){
 }
 
 function reloadServer($options){
-    $pidFile = \Conf\Config::getInstance()->getConf("SERVER.CONFIG.pid_file");
+    $pidFile = TT\Conf\Config::getInstance()->getConf('SERVER.CONFIG.pid_file');
     if(isset($options['pid'])){
         if(!empty($options['pid'])){
             $pidFile = $options['pid'];
@@ -251,10 +253,10 @@ function help($options){
             echo "--pid-all             是否重启所有进程，默认true".PHP_EOL;
             break;
         }
-        case 'update':{
-            echo "------------easySwoole 更新命令------------".PHP_EOL;
-            break;
-        }
+//        case 'update':{
+//            echo "------------easySwoole 更新命令------------".PHP_EOL;
+//            break;
+//        }
         default:{
             echo "------------欢迎使用easySwoole------------".PHP_EOL;
             echo "有关某个命令的详细信息，请使用 help 命令, 如help --start 可选参数为:".PHP_EOL;
@@ -273,7 +275,6 @@ function evenCheck(){
     if(phpversion('swoole') < 1.9){
         die("swoole version must >= 1.9.5");
     }
-
 }
 function opCacheClear(){
     if(function_exists('apc_clear_cache')){

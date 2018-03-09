@@ -12,7 +12,7 @@ namespace TT\Core;
 use TT\Conf\Config;
 use TT\Conf\Event;
 use TT\Core\AbstractInterface\ErrorHandlerInterface;
-use TT\Core\Component\DI;
+use TT\Core\Component\Di;
 use TT\Core\Component\Error\Trigger;
 use TT\Core\Component\Sys\ErrorHandler;
 use TT\Core\Component\Spl\SplError;
@@ -53,16 +53,18 @@ class Core
         $this->registerAutoLoader();
         $this->preHandle();
         Event::getInstance()->frameInitialize();
-        $this->sysDirectoryInit();
+//        $this->sysDirectoryInit();
         Event::getInstance()->frameInitialized();
         $this->registerErrorHandler();
         return $this;
     }
 
     private function defineSysConst(){
-        defined('ROOT') or define("ROOT",realpath(__DIR__.'/../'));
+        defined('ROOT') or define('ROOT',realpath(__DIR__.'/../'));
+        defined('USER') or define('USER',trim(shell_exec('whoami')));
+        defined('USER_GROUP') or define('USER_GROUP',trim(shell_exec('groups '.USER)));
     }
-    private function sysDirectoryInit(){
+//    private function sysDirectoryInit(){
 //        //创建临时目录
 //        $tempDir = Di::getInstance()->get(SysConst::TEMP_DIRECTORY);
 //        if(empty($tempDir)){
@@ -88,16 +90,16 @@ class Core
 //        }
 //        Config::getInstance()->setConf("SERVER.CONFIG.log_file",$logDir."/swoole.log");
 //        Config::getInstance()->setConf("SERVER.CONFIG.pid_file",$logDir."/pid.pid");
-    }
+//    }
 
     private static function registerAutoLoader(){
         require_once __DIR__."/AutoLoader.php";
         $loader = AutoLoader::getInstance();
         $loader->registerNamespaces(
             [
-                'TT\Core' => DOCROOT . "src/TT/Core/",
-                'TT\Conf' => DOCROOT . "src/TT/Conf/",
-                'TT\Base' => DOCROOT . "src/TT/Base/",
+                'TT\Core' => ROOT . "/Core/",
+                'TT\Conf' => ROOT . "/Conf/",
+                'TT\Base' => ROOT . "/Base/",
             ]
         );
         $loader->register();
@@ -105,7 +107,7 @@ class Core
 
     private function registerErrorHandler(){
         $conf = Config::getInstance()->getConf("DEBUG");
-        if($conf['ENABLE'] == true){
+        if(true === $conf['ENABLE']){
             ini_set("display_errors", "On");
             error_reporting(E_ALL | E_STRICT);
             set_error_handler(function($errorCode, $description, $file = null, $line = null, $context = null){
@@ -127,7 +129,11 @@ class Core
         if(is_callable($this->preCall)){
             call_user_func($this->preCall);
         }
-        DI::getInstance()->set(SysConst::SESSION_NAME,'EasySwoole');
-        DI::getInstance()->set(SysConst::VERSION,'1.1.0');
+        Di::getInstance()->set(SysConst::SESSION_NAME, function () {
+            return 'TT';
+        }, true);
+        Di::getInstance()->set(SysConst::VERSION, function () {
+            return '0.0.1';
+        }, true);
     }
 }

@@ -9,8 +9,8 @@
 namespace TT\Core\Http;
 
 
-use Conf\Config;
-use Conf\Event;
+use TT\Conf\Config;
+use TT\Conf\Event;
 use TT\Core\AbstractInterface\AbstractController;
 use TT\Core\AbstractInterface\AbstractRouter;
 use TT\Core\Component\Di;
@@ -42,8 +42,9 @@ class Dispatcher
             return;
         }
         $pathInfo = UrlParser::pathInfo();
+        var_dump($pathInfo);
         $routeInfo = $this->doFastRouter($pathInfo,Request::getInstance()->getMethod());
-        if($routeInfo !== false){
+        if(false !== $routeInfo){
             switch ($routeInfo[0]) {
                 case \FastRoute\Dispatcher::NOT_FOUND:
                     // ... 404 NdoDispatcherot Found

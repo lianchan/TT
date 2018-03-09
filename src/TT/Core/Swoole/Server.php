@@ -9,7 +9,7 @@
 namespace TT\Core\Swoole;
 
 
-use Conf\Event;
+use TT\Conf\Event;
 use TT\Core\AbstractInterface\AbstractAsyncTask;
 use TT\Core\AbstractInterface\HttpExceptionHandlerInterface;
 use TT\Core\Component\Di;
@@ -19,7 +19,7 @@ use TT\Core\Component\SysConst;
 use TT\Core\Http\Dispatcher;
 use TT\Core\Http\Request;
 use TT\Core\Http\Response;
-use \TT\Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
+use TT\Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
 
 class Server
 {

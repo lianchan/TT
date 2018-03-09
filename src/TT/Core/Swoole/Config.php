@@ -7,7 +7,7 @@
  */
 
 namespace TT\Core\Swoole;
-use Conf\Config as GlobalConf;
+use TT\Conf\Config as GlobalConf;
 
 class Config
 {

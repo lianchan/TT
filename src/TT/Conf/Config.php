@@ -48,6 +48,8 @@ class Config
 //                "SERVER_TYPE"    => TT\Core\Swoole\Config::SERVER_TYPE_WEB_SOCKET,// 直播打开
 //                'SOCKET_TYPE'    => SWOOLE_TCP,//当SERVER_TYPE为SERVER_TYPE_SERVER模式时有效
                 "CONFIG"=>array(
+                    'user'             => USER, //当前用户
+                    'group'            => USER_GROUP, //当前用户组
                     'task_worker_num'  => 8, //异步任务进程
                     "task_max_request" => 10,
                     'max_request'      => 5000,//强烈建议设置此配置项
