@@ -90,8 +90,45 @@ class Server
      * 监听http请求
      */
     private function listenRequest(){
+
+        try {
+            require_once realpath(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/app/config/env.php';
+
+            /**
+             * Read the configuration
+             */
+            $config = new ConfigIni(APP_PATH . 'config/config.ini');
+            if (is_readable(APP_PATH . 'config/config.ini.dev')) {
+                $override = new ConfigIni(APP_PATH . 'config/config.ini.dev');
+                $config->merge($override);
+            }
+
+            /**
+             * Auto-loader configuration
+             */
+            require APP_PATH . 'config/loader.php';
+
+            /**
+             * Load application services
+             */
+            require APP_PATH . 'config/services.php';
+
+            $application = new Application($di);
+            $application->setEventsManager($eventsManager);
+
+            if (APPLICATION_ENV == APP_TEST) {
+                return $application;
+            } else {
+//                $response2->write($application->handle()->getContent());
+//                    echo $application->handle()->getContent();
+            }
+        } catch (Exception $e){
+            echo $e->getMessage() . '<br>';
+            echo '<pre>' . $e->getTraceAsString() . '</pre>';
+        }
+
         $this->getServer()->on("request",
-            function (\swoole_http_request $request,\swoole_http_response $response){
+            function (\swoole_http_request $request,\swoole_http_response $response) use($application){
 
             var_dump('master_pid --> '.$this->swooleServer->master_pid);
             var_dump('manager_pid --> '.$this->swooleServer->manager_pid);
@@ -104,41 +141,8 @@ class Server
             $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
 
-            try {
-                require_once realpath(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/app/config/env.php';
+            $response2->write($application->handle()->getContent());
 
-                /**
-                 * Read the configuration
-                 */
-                $config = new ConfigIni(APP_PATH . 'config/config.ini');
-                if (is_readable(APP_PATH . 'config/config.ini.dev')) {
-                    $override = new ConfigIni(APP_PATH . 'config/config.ini.dev');
-                    $config->merge($override);
-                }
-
-                /**
-                 * Auto-loader configuration
-                 */
-                require APP_PATH . 'config/loader.php';
-
-                /**
-                 * Load application services
-                 */
-                require APP_PATH . 'config/services.php';
-
-                $application = new Application($di);
-                $application->setEventsManager($eventsManager);
-
-                if (APPLICATION_ENV == APP_TEST) {
-                    return $application;
-                } else {
-                    $response2->write($application->handle()->getContent());
-//                    echo $application->handle()->getContent();
-                }
-            } catch (Exception $e){
-                echo $e->getMessage() . '<br>';
-                echo '<pre>' . $e->getTraceAsString() . '</pre>';
-            }
 
 //            try{
 //                Event::getInstance()->onRequest($request2,$response2);
