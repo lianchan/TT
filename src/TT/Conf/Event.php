@@ -85,6 +85,7 @@ class Event extends AbstractEvent
         var_dump($request->getSwooleRequest()->get);
         var_dump('fd -------> '.$request->getSwooleRequest()->fd);
         // TODO: Implement onRequest() method.
+//        $response->writeJson('goodluck');
     }
 
     function onDispatcher(Request $request, Response $response, $targetControllerClass, $targetAction)

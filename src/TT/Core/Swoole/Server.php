@@ -114,6 +114,9 @@ class Server
             }
             $response2->end(true);
         });
+        $this->getServer()->on('close',function () {
+            var_dump('swoole_http_server closed');
+        });
     }
     private function workerStartEvent(){
         $this->getServer()->on("workerStart",function (\swoole_server $server, $workerId){
