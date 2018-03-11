@@ -120,6 +120,7 @@ class Dispatcher
             $this->controllerMap[$pathInfo]['finalClass'] = $finalClass;
             $this->controllerMap[$pathInfo]['actionName'] = $actionName;
         }
+        var_dump('$finalClass --> '.$finalClass);
         if(class_exists($finalClass)){
             if($this->useControllerPool){
                 if(isset($this->controllerPool[$finalClass])){

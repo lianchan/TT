@@ -9,9 +9,7 @@
 namespace TT\Core\AbstractInterface;
 use TT\Core\Http\Request;
 use TT\Core\Http\Response;
-use FastRoute\DataGenerator\GroupCountBased;
-use FastRoute\RouteCollector;
-use FastRoute\RouteParser\Std;
+use Phalcon\Mvc\Router;
 
 abstract class AbstractRouter
 {
@@ -20,11 +18,11 @@ abstract class AbstractRouter
     private $routeCollector;
     function __construct()
     {
-        $this->routeCollector = new RouteCollector(new Std(),new GroupCountBased());
+        $this->routeCollector = new Router();
         $this->register($this->routeCollector);
     }
 
-    abstract function register(RouteCollector $routeCollector);
+    abstract function register(Router $routeCollector);
     function getRouteCollector(){
         return $this->routeCollector;
     }

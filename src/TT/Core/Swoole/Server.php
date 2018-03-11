@@ -100,18 +100,19 @@ class Server
 
             $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
-            try{
-                Event::getInstance()->onRequest($request2,$response2);
-                Dispatcher::getInstance()->dispatch();
-                Event::getInstance()->onResponse($request2,$response2);
-            }catch (\Exception $exception){
-                $handler = Di::getInstance()->get(SysConst::HTTP_EXCEPTION_HANDLER);
-                if($handler instanceof HttpExceptionHandlerInterface){
-                    $handler->handler($exception,$request2,$response2);
-                }else{
-                    Trigger::exception($exception);
-                }
-            }
+//            try{
+//                Event::getInstance()->onRequest($request2,$response2);
+//                Dispatcher::getInstance()->dispatch();
+//                Event::getInstance()->onResponse($request2,$response2);
+//            }catch (\Exception $exception){
+//                $handler = Di::getInstance()->get(SysConst::HTTP_EXCEPTION_HANDLER);
+//                if($handler instanceof HttpExceptionHandlerInterface){
+//                    $handler->handler($exception,$request2,$response2);
+//                }else{
+//                    Trigger::exception($exception);
+//                }
+//            }
+            $response2->write('goodluck');
             $response2->end(true);
         });
         $this->getServer()->on('close',function () {
