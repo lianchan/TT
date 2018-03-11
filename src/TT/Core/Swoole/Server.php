@@ -20,6 +20,9 @@ use TT\Core\Http\Request;
 use TT\Core\Http\Response;
 use TT\Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
 
+use Phalcon\Mvc\Application;
+use Phalcon\Config\Adapter\Ini as ConfigIni;
+
 class Server
 {
     protected static $instance;
@@ -100,6 +103,43 @@ class Server
 
             $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
+
+            try {
+                require_once realpath(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/app/config/env.php';
+
+                /**
+                 * Read the configuration
+                 */
+                $config = new ConfigIni(APP_PATH . 'config/config.ini');
+                if (is_readable(APP_PATH . 'config/config.ini.dev')) {
+                    $override = new ConfigIni(APP_PATH . 'config/config.ini.dev');
+                    $config->merge($override);
+                }
+
+                /**
+                 * Auto-loader configuration
+                 */
+                require APP_PATH . 'config/loader.php';
+
+                /**
+                 * Load application services
+                 */
+                require APP_PATH . 'config/services.php';
+
+                $application = new Application($di);
+                $application->setEventsManager($eventsManager);
+
+                if (APPLICATION_ENV == APP_TEST) {
+                    return $application;
+                } else {
+                    $response2->write($application->handle()->getContent());
+//                    echo $application->handle()->getContent();
+                }
+            } catch (Exception $e){
+                echo $e->getMessage() . '<br>';
+                echo '<pre>' . $e->getTraceAsString() . '</pre>';
+            }
+
 //            try{
 //                Event::getInstance()->onRequest($request2,$response2);
 //                Dispatcher::getInstance()->dispatch();
@@ -112,7 +152,6 @@ class Server
 //                    Trigger::exception($exception);
 //                }
 //            }
-            $response2->write('goodluck');
             $response2->end(true);
         });
         $this->getServer()->on('close',function () {
