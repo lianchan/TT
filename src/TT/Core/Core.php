@@ -98,7 +98,6 @@ class Core
         $loader = AutoLoader::getInstance();
         $loader->registerNamespaces(
             [
-                'App' => ROOT . "/App/",
                 'TT\Core' => ROOT . "/Core/",
                 'TT\Conf' => ROOT . "/Conf/",
                 'TT\Base' => ROOT . "/Base/",

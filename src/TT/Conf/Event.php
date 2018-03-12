@@ -81,9 +81,6 @@ class Event extends AbstractEvent
 
     function onRequest(Request $request, Response $response)
     {
-        var_dump('get -------> ');
-        var_dump($request->getSwooleRequest()->get);
-        var_dump('fd -------> '.$request->getSwooleRequest()->fd);
         // TODO: Implement onRequest() method.
 //        $response->writeJson('goodluck');
     }

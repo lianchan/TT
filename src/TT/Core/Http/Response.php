@@ -67,7 +67,7 @@ class Response extends HttpResponse
         return $this->isEndResponse;
     }
     function write($obj){
-        if(!$this->isEndResponse()){
+        if($this->isEndResponse() == self::STATUS_NOT_END){
             if(is_object($obj)){
                 if(method_exists($obj,"__toString")){
                     $obj = $obj->__toString();
@@ -82,7 +82,7 @@ class Response extends HttpResponse
             $this->getBody()->write($obj);
             return true;
         }else{
-            trigger_error("response has end");
+//            trigger_error("response has end");
             return false;
         }
     }

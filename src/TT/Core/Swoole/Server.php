@@ -64,7 +64,6 @@ class Server
 
         try {
             require_once realpath(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/app/config/env.php';
-
             /**
              * Read the configuration
              */
@@ -73,27 +72,18 @@ class Server
                 $override = new ConfigIni(APP_PATH . 'config/config.ini.dev');
                 $config->merge($override);
             }
-
             /**
              * Auto-loader configuration
              */
             require APP_PATH . 'config/loader.php';
-
             /**
              * Load application services
              */
             require APP_PATH . 'config/services.php';
-
             $this->phalconApplication = new Application($di);
             $this->phalconApplication->setEventsManager($eventsManager);
 
-            if (APPLICATION_ENV == APP_TEST) {
-                return $this->phalconApplication;
-            } else {
-//                $response2->write($application->handle()->getContent());
-//                    echo $application->handle()->getContent();
-            }
-        } catch (Exception $e){
+        } catch (\Exception $e){
             echo $e->getMessage() . '<br>';
             echo '<pre>' . $e->getTraceAsString() . '</pre>';
         }
@@ -115,13 +105,20 @@ class Server
         $this->isStart = 1;
         $this->getServer()->start();
     }
-    /*
+    /**
      * 用于获取 swoole_server 实例
      * server启动后，在每个进程中获得的，均为当前自身worker的server（可以理解为进程克隆后独立运行）
-     * @return swoole_server
+     * @return \swoole_server
      */
     function getServer(){
         return $this->swooleServer;
+    }
+    /**
+     * 获取 phalcon mvc application
+     * @return \Phalcon\Mvc\Application
+     */
+    function getPhalconApplication(){
+        return $this->phalconApplication;
     }
     /*
      * 监听http请求
@@ -131,60 +128,36 @@ class Server
         $this->getServer()->on("request",
             function (\swoole_http_request $request,\swoole_http_response $response){
 
-            var_dump('master_pid --> '.$this->swooleServer->master_pid);
-            var_dump('manager_pid --> '.$this->swooleServer->manager_pid);
-            var_dump('worker_id --> '.$this->swooleServer->worker_id);
-            var_dump('taskworker --> '.$this->swooleServer->taskworker);
-            var_dump('connections --> '.$this->swooleServer->connections);
-//            var_dump('ports --> ');
-//            var_dump($this->swooleServer->ports);
+            echo '-------------------------------------------------------------' . PHP_EOL;
+            echo 'fd --> '.$request->fd . PHP_EOL;
+            echo 'master_pid --> '.$this->swooleServer->master_pid . PHP_EOL;
+            echo 'manager_pid --> '.$this->swooleServer->manager_pid . PHP_EOL;
+            echo 'worker_id --> '.$this->swooleServer->worker_id . PHP_EOL;
+            echo 'taskworker --> '.$this->swooleServer->taskworker . PHP_EOL;
+            echo 'connections --> '.$this->swooleServer->connections . PHP_EOL;
+            echo date('Y-m-d H:i:s') . PHP_EOL;
+//            echo 'get -------> ' . PHP_EOL;
+//            echo $request->get . PHP_EOL;
 
             $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
-
-            //注册捕获错误函数
-//            register_shutdown_function(array($this, 'handleFatal'));
-            if ($request->server['request_uri'] == '/favicon.ico' || $request->server['path_info'] == '/favicon.ico') {
-                return $response2->end();
-            }
-
-            $_SERVER = $request->server;
-
-            //构造url请求路径,phalcon获取到$_GET['_url']时会定向到对应的路径，否则请求路径为'/'
-            $_GET['_url'] = $request->server['request_uri'];
-
-            if ($request->server['request_method'] == 'GET' && isset($request->get)) {
-                foreach ($request->get as $key => $value) {
-                    $_GET[$key] = $value;
-                    $_REQUEST[$key] = $value;
+            try{
+                Event::getInstance()->onRequest($request2,$response2);
+                Dispatcher::getInstance()->dispatch();
+                Event::getInstance()->onResponse($request2,$response2);
+            }catch (\Exception $exception){
+                $handler = Di::getInstance()->get(SysConst::HTTP_EXCEPTION_HANDLER);
+                if($handler instanceof HttpExceptionHandlerInterface){
+                    $handler->handler($exception,$request2,$response2);
+                }else{
+                    Trigger::exception($exception);
                 }
             }
-            if ($request->server['request_method'] == 'POST' && isset($request->post) ) {
-                foreach ($request->post as $key => $value) {
-                    $_POST[$key] = $value;
-                    $_REQUEST[$key] = $value;
-                }
-            }
-
-            $response2->write($this->phalconApplication->handle()->getContent());
-
-//            try{
-//                Event::getInstance()->onRequest($request2,$response2);
-//                Dispatcher::getInstance()->dispatch();
-//                Event::getInstance()->onResponse($request2,$response2);
-//            }catch (\Exception $exception){
-//                $handler = Di::getInstance()->get(SysConst::HTTP_EXCEPTION_HANDLER);
-//                if($handler instanceof HttpExceptionHandlerInterface){
-//                    $handler->handler($exception,$request2,$response2);
-//                }else{
-//                    Trigger::exception($exception);
-//                }
-//            }
             $response2->end(true);
         });
-        $this->getServer()->on('close',function () {
-            var_dump('swoole_http_server closed');
-        });
+//        $this->getServer()->on('close',function () {
+//            var_dump('swoole_http_server closed');
+//        });
     }
     private function workerStartEvent(){
         $this->getServer()->on("workerStart",function (\swoole_server $server, $workerId){
