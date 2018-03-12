@@ -1,4 +1,6 @@
-[] swoole ide helper
+[x] swoole ide helper
+[] session
+[] restFul
 
 github
 
