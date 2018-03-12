@@ -8,6 +8,8 @@
  */
 
 require_once 'Core/Core.php';
+require_once realpath(dirname(dirname(__FILE__))) . '/app/config/env.php';
+
 $server = TT\Core\Core::getInstance()->frameWorkInitialize();
 function commandParser(){
     global $argv;

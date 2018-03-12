@@ -1,2 +1,2 @@
 <?php
-require_once dirname(__FILE__).'/../TT/server';
+require_once dirname(__FILE__).'/../server';

@@ -63,7 +63,6 @@ class Server
     function startServer(){
 
         try {
-            require_once realpath(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/app/config/env.php';
             /**
              * Read the configuration
              */
