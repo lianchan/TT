@@ -129,7 +129,7 @@ class Server
     private function listenRequest(){
 
         $this->getServer()->on("request",
-            function (\swoole_http_request $request,\swoole_http_response $response) use($application){
+            function (\swoole_http_request $request,\swoole_http_response $response){
 
             var_dump('master_pid --> '.$this->swooleServer->master_pid);
             var_dump('manager_pid --> '.$this->swooleServer->manager_pid);
@@ -145,7 +145,7 @@ class Server
             //注册捕获错误函数
 //            register_shutdown_function(array($this, 'handleFatal'));
             if ($request->server['request_uri'] == '/favicon.ico' || $request->server['path_info'] == '/favicon.ico') {
-                return $response->end();
+                return $response2->end();
             }
 
             $_SERVER = $request->server;

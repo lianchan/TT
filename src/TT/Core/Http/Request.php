@@ -8,7 +8,6 @@
 
 namespace TT\Core\Http;
 
-
 use TT\Core\Http\Message\ServerRequest;
 use TT\Core\Http\Message\Stream;
 use TT\Core\Http\Message\UploadFile;

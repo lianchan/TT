@@ -7,6 +7,7 @@
  */
 
 namespace TT\Core\Http;
+
 use TT\Conf\Event;
 use TT\Core\Http\Message\Response as HttpResponse;
 use TT\Core\Http\Message\Status;
