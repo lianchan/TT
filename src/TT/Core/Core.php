@@ -22,8 +22,6 @@ use TT\Core\Http\Response;
 use TT\Core\Swoole\Server;
 use TT\Core\Utility\File;
 
-use Phalcon\Mvc\Application;
-use Phalcon\Config\Adapter\Ini as ConfigIni;
 
 class Core
 {

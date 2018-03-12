@@ -28,6 +28,7 @@ class Server
     protected static $instance;
     protected $swooleServer;
     protected $isStart = 0;
+    protected $phalconApplication;
     /*
      * 仅仅用于获取一个服务实例
      * @return Server
@@ -60,36 +61,6 @@ class Server
      * 创建并启动一个swoole http server
      */
     function startServer(){
-        $conf = Config::getInstance();
-        $this->getServer()->set($conf->getWorkerSetting());
-        $this->beforeWorkerStart();
-        $this->pipeMessage();
-        $this->serverStartEvent();
-        $this->serverShutdownEvent();
-        $this->workerErrorEvent();
-        $this->onTaskEvent();
-        $this->onFinish();
-        $this->workerStartEvent();
-        $this->workerStopEvent();
-        if($conf->getServerType() != Config::SERVER_TYPE_SERVER){
-            var_dump($conf->getServerType());
-            $this->listenRequest();
-        }
-        $this->isStart = 1;
-        $this->getServer()->start();
-    }
-    /*
-     * 用于获取 swoole_server 实例
-     * server启动后，在每个进程中获得的，均为当前自身worker的server（可以理解为进程克隆后独立运行）
-     * @return swoole_server
-     */
-    function getServer(){
-        return $this->swooleServer;
-    }
-    /*
-     * 监听http请求
-     */
-    private function listenRequest(){
 
         try {
             require_once realpath(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/app/config/env.php';
@@ -113,11 +84,11 @@ class Server
              */
             require APP_PATH . 'config/services.php';
 
-            $application = new Application($di);
-            $application->setEventsManager($eventsManager);
+            $this->phalconApplication = new Application($di);
+            $this->phalconApplication->setEventsManager($eventsManager);
 
             if (APPLICATION_ENV == APP_TEST) {
-                return $application;
+                return $this->phalconApplication;
             } else {
 //                $response2->write($application->handle()->getContent());
 //                    echo $application->handle()->getContent();
@@ -126,6 +97,36 @@ class Server
             echo $e->getMessage() . '<br>';
             echo '<pre>' . $e->getTraceAsString() . '</pre>';
         }
+
+        $conf = Config::getInstance();
+        $this->getServer()->set($conf->getWorkerSetting());
+        $this->beforeWorkerStart();
+        $this->pipeMessage();
+        $this->serverStartEvent();
+        $this->serverShutdownEvent();
+        $this->workerErrorEvent();
+        $this->onTaskEvent();
+        $this->onFinish();
+        $this->workerStartEvent();
+        $this->workerStopEvent();
+        if($conf->getServerType() != Config::SERVER_TYPE_SERVER){
+            $this->listenRequest();
+        }
+        $this->isStart = 1;
+        $this->getServer()->start();
+    }
+    /*
+     * 用于获取 swoole_server 实例
+     * server启动后，在每个进程中获得的，均为当前自身worker的server（可以理解为进程克隆后独立运行）
+     * @return swoole_server
+     */
+    function getServer(){
+        return $this->swooleServer;
+    }
+    /*
+     * 监听http请求
+     */
+    private function listenRequest(){
 
         $this->getServer()->on("request",
             function (\swoole_http_request $request,\swoole_http_response $response) use($application){
@@ -141,8 +142,31 @@ class Server
             $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
 
-            $response2->write($application->handle()->getContent());
+            //注册捕获错误函数
+//            register_shutdown_function(array($this, 'handleFatal'));
+            if ($request->server['request_uri'] == '/favicon.ico' || $request->server['path_info'] == '/favicon.ico') {
+                return $response->end();
+            }
 
+            $_SERVER = $request->server;
+
+            //构造url请求路径,phalcon获取到$_GET['_url']时会定向到对应的路径，否则请求路径为'/'
+            $_GET['_url'] = $request->server['request_uri'];
+
+            if ($request->server['request_method'] == 'GET' && isset($request->get)) {
+                foreach ($request->get as $key => $value) {
+                    $_GET[$key] = $value;
+                    $_REQUEST[$key] = $value;
+                }
+            }
+            if ($request->server['request_method'] == 'POST' && isset($request->post) ) {
+                foreach ($request->post as $key => $value) {
+                    $_POST[$key] = $value;
+                    $_REQUEST[$key] = $value;
+                }
+            }
+
+            $response2->write($this->phalconApplication->handle()->getContent());
 
 //            try{
 //                Event::getInstance()->onRequest($request2,$response2);
