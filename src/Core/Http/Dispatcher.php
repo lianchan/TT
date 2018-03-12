@@ -49,7 +49,7 @@ class Dispatcher
         $phalcon_application = Server::getInstance()->getPhalconApplication();
 
         //注册捕获错误函数
-//            register_shutdown_function(array($this, 'handleFatal'));
+//        register_shutdown_function(array($this, 'handleFatal'));
         if ($request2->server['request_uri'] == '/favicon.ico' || $request2->server['path_info'] == '/favicon.ico') {
             return $response->end(true);
         }
