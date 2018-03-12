@@ -6,17 +6,17 @@
  * Time: 下午3:49
  */
 
-namespace TT\Core\Component\RPC\Server;
+namespace Core\Component\RPC\Server;
 
 
-use TT\Core\Component\RPC\AbstractInterface\AbstractActionRegister;
-use TT\Core\Component\RPC\AbstractInterface\AbstractPackageParser;
-use TT\Core\Component\RPC\Common\ActionList;
-use TT\Core\Component\RPC\Common\Config;
-use TT\Core\Component\RPC\Common\Package;
-use TT\Core\Component\Socket\Client\TcpClient;
-use TT\Core\Component\Socket\Response;
-use \TT\Core\Swoole\Server as SwooleServer;
+use Core\Component\RPC\AbstractInterface\AbstractActionRegister;
+use Core\Component\RPC\AbstractInterface\AbstractPackageParser;
+use Core\Component\RPC\Common\ActionList;
+use Core\Component\RPC\Common\Config;
+use Core\Component\RPC\Common\Package;
+use Core\Component\Socket\Client\TcpClient;
+use Core\Component\Socket\Response;
+use \Core\Swoole\Server as SwooleServer;
 
 class Server
 {

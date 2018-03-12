@@ -6,7 +6,7 @@
  * Time: 下午3:46
  */
 
-namespace TT\Core\Component\RPC\Common;
+namespace Core\Component\RPC\Common;
 
 
 class ActionList

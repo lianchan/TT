@@ -6,9 +6,9 @@
  * Time: 下午12:26
  */
 
-namespace TT\Core\Http\Session;
-use TT\Core\Component\IO\FileIO;
-use TT\Core\Utility\File;
+namespace Core\Http\Session;
+use Core\Component\IO\FileIO;
+use Core\Utility\File;
 
 class SessionHandler implements \SessionHandlerInterface
 {

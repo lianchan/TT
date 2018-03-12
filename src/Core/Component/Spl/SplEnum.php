@@ -6,7 +6,7 @@
  * Time: 下午2:56
  */
 
-namespace TT\Core\Component\Spl;
+namespace Core\Component\Spl;
 
 
 class SplEnum

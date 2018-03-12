@@ -6,11 +6,11 @@
  * Time: 上午2:28
  */
 
-namespace TT\Core\Swoole\Pipe;
+namespace Core\Swoole\Pipe;
 
 
-use TT\Core\Component\Di;
-use TT\Core\Component\SysConst;
+use Core\Component\Di;
+use Core\Component\SysConst;
 
 class Dispatcher
 {

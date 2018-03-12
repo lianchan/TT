@@ -6,8 +6,8 @@
  * Time: 02:44
  */
 
-namespace TT\Core\Swoole;
-use TT\Conf\Config as GlobalConf;
+namespace Core\Swoole;
+use Conf\Config as GlobalConf;
 
 class Config
 {

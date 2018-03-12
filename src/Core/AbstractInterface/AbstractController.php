@@ -6,11 +6,11 @@
  * Time: 上午1:07
  */
 
-namespace TT\Core\AbstractInterface;
+namespace Core\AbstractInterface;
 
-use TT\Core\Http\Message\Status;
-use TT\Core\Http\Request;
-use TT\Core\Http\Response;
+use Core\Http\Message\Status;
+use Core\Http\Request;
+use Core\Http\Response;
 
 abstract class AbstractController
 {

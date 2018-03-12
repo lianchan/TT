@@ -1,5 +1,5 @@
 <?php
-namespace TT\Conf;
+namespace Conf;
 
 use Core\Swoole\Server;
 use Core\Swoole\AsyncTaskManager;

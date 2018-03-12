@@ -6,7 +6,7 @@
  * Time: 下午9:37
  */
 
-namespace TT\Core\Utility\Validate;
+namespace Core\Utility\Validate;
 
 
 class Field

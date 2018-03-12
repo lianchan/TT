@@ -6,13 +6,13 @@
  * Time: 下午7:03
  */
 
-namespace TT\Core\Component\Error;
+namespace Core\Component\Error;
 
 
-use TT\Core\AbstractInterface\ErrorHandlerInterface;
-use TT\Core\Component\Logger;
-use TT\Core\Http\Request;
-use TT\Core\Http\Response;
+use Core\AbstractInterface\ErrorHandlerInterface;
+use Core\Component\Logger;
+use Core\Http\Request;
+use Core\Http\Response;
 
 class ErrorHandler  implements ErrorHandlerInterface
 {

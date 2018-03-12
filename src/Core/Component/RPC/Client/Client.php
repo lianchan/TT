@@ -6,13 +6,13 @@
  * Time: 下午5:35
  */
 
-namespace TT\Core\Component\RPC\Client;
+namespace Core\Component\RPC\Client;
 
 
-use TT\Core\Component\RPC\AbstractInterface\AbstractPackageParser;
-use TT\Core\Component\RPC\Common\Config;
-use TT\Core\Component\RPC\Common\Package;
-use TT\Core\Component\Socket\Client\TcpClient;
+use Core\Component\RPC\AbstractInterface\AbstractPackageParser;
+use Core\Component\RPC\Common\Config;
+use Core\Component\RPC\Common\Package;
+use Core\Component\Socket\Client\TcpClient;
 
 class Client
 {

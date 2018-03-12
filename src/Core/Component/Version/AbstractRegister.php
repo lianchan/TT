@@ -6,7 +6,7 @@
  * Time: 下午9:58
  */
 
-namespace TT\Core\Component\Version;
+namespace Core\Component\Version;
 
 
 abstract class AbstractRegister

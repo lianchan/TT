@@ -6,10 +6,10 @@
  * Time: 下午1:54
  */
 
-namespace TT\Core\Component\Spl;
+namespace Core\Component\Spl;
 
 
-use TT\Core\Utility\Judge;
+use Core\Utility\Judge;
 
 abstract class SplBean implements \JsonSerializable
 {

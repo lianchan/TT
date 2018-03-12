@@ -6,14 +6,14 @@
  * Time: 下午12:29
  */
 
-namespace TT\Core\Component\Error;
+namespace Core\Component\Error;
 
 
-use TT\Conf\Config;
-use TT\Core\AbstractInterface\ErrorHandlerInterface;
-use TT\Core\AbstractInterface\ExceptionHandlerInterface;
-use TT\Core\Component\DI;
-use TT\Core\Component\SysConst;
+use Conf\Config;
+use Core\AbstractInterface\ErrorHandlerInterface;
+use Core\AbstractInterface\ExceptionHandlerInterface;
+use Core\Component\DI;
+use Core\Component\SysConst;
 
 class Trigger
 {

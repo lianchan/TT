@@ -6,7 +6,7 @@
  * Time: 下午3:48
  */
 
-namespace TT\Core\Component\RPC\Server;
+namespace Core\Component\RPC\Server;
 
 class Service
 {

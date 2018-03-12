@@ -6,7 +6,7 @@
  * Time: 上午12:08
  */
 
-namespace TT\Core\AbstractInterface;
+namespace Core\AbstractInterface;
 
 
 abstract class AbstractREST extends AbstractController

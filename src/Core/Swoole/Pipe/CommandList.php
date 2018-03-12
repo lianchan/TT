@@ -6,7 +6,7 @@
  * Time: 上午2:33
  */
 
-namespace TT\Core\Swoole\Pipe;
+namespace Core\Swoole\Pipe;
 
 
 class CommandList

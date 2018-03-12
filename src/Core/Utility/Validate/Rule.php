@@ -6,7 +6,7 @@
  * Time: 下午12:29
  */
 
-namespace TT\Core\Utility\Validate;
+namespace Core\Utility\Validate;
 
 
 class Rule

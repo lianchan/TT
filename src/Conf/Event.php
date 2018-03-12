@@ -6,13 +6,13 @@
  * Time: 上午12:06
  */
 
-namespace TT\Conf;
+namespace Conf;
 
-use TT\Core\AbstractInterface\AbstractEvent;
-use TT\Core\Component\Di;
-use TT\Core\Http\Request;
-use TT\Core\Http\Response;
-use TT\Core\AutoLoader;
+use Core\AbstractInterface\AbstractEvent;
+use Core\Component\Di;
+use Core\Http\Request;
+use Core\Http\Response;
+use Core\AutoLoader;
 
 
 class Event extends AbstractEvent
@@ -45,13 +45,13 @@ class Event extends AbstractEvent
         // TODO: Implement beforeWorkerStart() method.
 
         // 直播
-        // \TT\Conf\Live::getInstance()->beforeWorkerStart($server);
+        // \Conf\Live::getInstance()->beforeWorkerStart($server);
 
         // WebSocket
-//        \TT\Conf\WebSocket::getInstance()->beforeWorkerStart($server);
+//        \Conf\WebSocket::getInstance()->beforeWorkerStart($server);
 
         // WebSocketCommandParser
-        // \TT\Conf\WebSocketCommandParser::getInstance()->beforeWorkerStart($server);
+        // \Conf\WebSocketCommandParser::getInstance()->beforeWorkerStart($server);
     }
 
     function onStart(\swoole_server $server)
@@ -69,7 +69,7 @@ class Event extends AbstractEvent
         // TODO: Implement onWorkerStart() method.
 
         // WebSocketCommandParser
-        // \TT\Conf\WebSocketCommandParser::getInstance()->onWorkerStart($server, $workerId);
+        // \Conf\WebSocketCommandParser::getInstance()->onWorkerStart($server, $workerId);
 
 //        $this->_hotReload($server, $workerId);
     }
@@ -114,12 +114,12 @@ class Event extends AbstractEvent
     {
 
         if ($workerId == 0) {
-            \TT\Core\Swoole\Timer::loop(3000, function(){
-                \TT\Core\Swoole\Server::getInstance()->getServer()->reload();
+            \Core\Swoole\Timer::loop(3000, function(){
+                \Core\Swoole\Server::getInstance()->getServer()->reload();
             });
         }
 
-        // $pidFile = \TT\Conf\TT\Config::getInstance()->getTT\Conf("SERVER.CONFIG.pid_file");
+        // $pidFile = \Conf\Config::getInstance()->getConf("SERVER.CONFIG.pid_file");
         // // echo $pidFile;
         // if(!file_exists($pidFile)){
         //     echo "pid file :{$pidFile} not exist \n";

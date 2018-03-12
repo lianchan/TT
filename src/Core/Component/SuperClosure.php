@@ -6,7 +6,7 @@
  * Time: 14:44
  */
 
-namespace TT\Core\Component;
+namespace Core\Component;
 use SuperClosure\Serializer;
 
 class SuperClosure

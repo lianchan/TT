@@ -6,7 +6,7 @@
  * Time: 上午9:44
  */
 
-namespace TT\Core\AbstractInterface;
+namespace Core\AbstractInterface;
 
 interface ErrorHandlerInterface
 {

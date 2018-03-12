@@ -6,10 +6,10 @@
  * Time: 下午5:40
  */
 
-namespace TT\Core\Component\RPC\Client;
+namespace Core\Component\RPC\Client;
 
 
-use TT\Core\Component\RPC\Common\Package;
+use Core\Component\RPC\Common\Package;
 
 class Call
 {

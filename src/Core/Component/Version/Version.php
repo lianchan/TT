@@ -6,7 +6,7 @@
  * Time: 下午9:57
  */
 
-namespace TT\Core\Component\Version;
+namespace Core\Component\Version;
 use FastRoute\DataGenerator\GroupCountBased;
 use FastRoute\Dispatcher\GroupCountBased as Dispatcher;
 use FastRoute\RouteCollector;

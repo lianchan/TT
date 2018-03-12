@@ -6,12 +6,10 @@
  * Time: 上午12:30
  */
 
-namespace TT\Core\Swoole;
+namespace Core\Swoole;
 
-
-
-use TT\Core\AbstractInterface\AbstractAsyncTask;
-use TT\Core\Component\SuperClosure;
+use Core\AbstractInterface\AbstractAsyncTask;
+use Core\Component\SuperClosure;
 
 class AsyncTaskManager
 {

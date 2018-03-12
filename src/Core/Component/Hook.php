@@ -6,11 +6,11 @@
  * Time: 上午12:05
  */
 
-namespace TT\Core\Component;
+namespace Core\Component;
 
 
-use TT\Core\Swoole\AsyncTaskManager;
-use TT\Core\Swoole\Server;
+use Core\Swoole\AsyncTaskManager;
+use Core\Swoole\Server;
 
 class Hook
 {

@@ -6,7 +6,7 @@
  * Time: 下午12:15
  */
 
-namespace TT\Core\Utility;
+namespace Core\Utility;
 
 
 class File

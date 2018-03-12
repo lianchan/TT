@@ -6,14 +6,14 @@
  * Time: 下午8:44
  */
 
-namespace TT\Core\Http;
+namespace Core\Http;
 
-use TT\Conf\Event;
-use TT\Core\Http\Message\Response as HttpResponse;
-use TT\Core\Http\Message\Status;
-use TT\Core\Http\Session\Response as SessionResponse;
-use TT\Core\Http\Session\Session;
-use TT\Core\Utility\Curl\Cookie;
+use Conf\Event;
+use Core\Http\Message\Response as HttpResponse;
+use Core\Http\Message\Status;
+use Core\Http\Session\Response as SessionResponse;
+use Core\Http\Session\Session;
+use Core\Utility\Curl\Cookie;
 
 class Response extends HttpResponse
 {

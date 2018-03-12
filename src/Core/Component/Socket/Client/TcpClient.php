@@ -6,11 +6,11 @@
  * Time: 下午1:45
  */
 
-namespace TT\Core\Component\Socket\Client;
+namespace Core\Component\Socket\Client;
 
 
-use TT\Core\Component\Socket\AbstractInterface\AbstractClient;
-use TT\Core\Component\Socket\Type;
+use Core\Component\Socket\AbstractInterface\AbstractClient;
+use Core\Component\Socket\Type;
 
 class TcpClient extends AbstractClient
 {

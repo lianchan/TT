@@ -6,7 +6,7 @@
  * Time: 下午10:08
  */
 
-namespace TT\Core\Component\Version;
+namespace Core\Component\Version;
 
 
 class VersionList

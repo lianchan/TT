@@ -6,15 +6,15 @@
  * Time: 下午9:25
  */
 
-namespace TT\Core\Http\Session;
+namespace Core\Http\Session;
 
 
-use TT\Core\Component\Di;
-use TT\Core\Component\SysConst;
-use TT\Core\Http\Request as HttpRequest;
-use TT\Core\Http\Response as HttpResponse;
-use TT\Core\Swoole\AsyncTaskManager;
-use TT\Core\Utility\Random;
+use Core\Component\Di;
+use Core\Component\SysConst;
+use Core\Http\Request as HttpRequest;
+use Core\Http\Response as HttpResponse;
+use Core\Swoole\AsyncTaskManager;
+use Core\Utility\Random;
 
 class Session
 {

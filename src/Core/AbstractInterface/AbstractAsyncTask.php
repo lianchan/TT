@@ -6,10 +6,10 @@
  * Time: 上午12:28
  */
 
-namespace TT\Core\AbstractInterface;
+namespace Core\AbstractInterface;
 
 
-use TT\Core\Swoole\Server;
+use Core\Swoole\Server;
 
 abstract class AbstractAsyncTask
 {

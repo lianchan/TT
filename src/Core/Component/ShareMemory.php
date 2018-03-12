@@ -6,11 +6,11 @@
  * Time: 下午5:30
  */
 
-namespace TT\Core\Component;
+namespace Core\Component;
 
 
-use TT\Core\Component\IO\FileIO;
-use TT\Core\Component\Spl\SplArray;
+use Core\Component\IO\FileIO;
+use Core\Component\Spl\SplArray;
 
 class ShareMemory
 {

@@ -6,7 +6,7 @@
  * Time: 下午8:40
  */
 
-namespace TT\Core\Utility;
+namespace Core\Utility;
 
 
 class Random

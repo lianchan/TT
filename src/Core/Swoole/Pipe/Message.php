@@ -6,10 +6,10 @@
  * Time: 上午2:25
  */
 
-namespace TT\Core\Swoole\Pipe;
+namespace Core\Swoole\Pipe;
 
 
-use TT\Core\Component\Spl\SplBean;
+use Core\Component\Spl\SplBean;
 
 class Message extends SplBean
 {

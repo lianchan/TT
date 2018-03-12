@@ -6,11 +6,11 @@
  * Time: 下午4:15
  */
 
-namespace TT\Core\Component\RPC\Common;
+namespace Core\Component\RPC\Common;
 
 
-use TT\Core\Component\RPC\AbstractInterface\AbstractPackageParser;
-use TT\Core\Component\Socket\Client\TcpClient;
+use Core\Component\RPC\AbstractInterface\AbstractPackageParser;
+use Core\Component\Socket\Client\TcpClient;
 
 class DefaultPackageParser extends AbstractPackageParser
 {

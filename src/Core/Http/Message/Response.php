@@ -6,10 +6,10 @@
  * Time: 下午12:28
  */
 
-namespace TT\Core\Http\Message;
+namespace Core\Http\Message;
 
 
-use TT\Core\Utility\Curl\Cookie;
+use Core\Utility\Curl\Cookie;
 
 class Response extends Message
 {

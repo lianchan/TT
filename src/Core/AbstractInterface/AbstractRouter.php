@@ -6,9 +6,9 @@
  * Time: 下午8:21
  */
 
-namespace TT\Core\AbstractInterface;
-use TT\Core\Http\Request;
-use TT\Core\Http\Response;
+namespace Core\AbstractInterface;
+use Core\Http\Request;
+use Core\Http\Response;
 use Phalcon\Mvc\Router;
 
 abstract class AbstractRouter

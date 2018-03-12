@@ -6,17 +6,17 @@
  * Time: 上午12:44
  */
 
-namespace TT\Core\Http;
+namespace Core\Http;
 
 
-use TT\Conf\Config;
-use TT\Conf\Event;
-use TT\Core\AbstractInterface\AbstractController;
-use TT\Core\AbstractInterface\AbstractRouter;
-use TT\Core\Component\Di;
-use TT\Core\Component\SysConst;
-use TT\Core\Http\Message\Status;
-use TT\Core\Swoole\Server;
+use Conf\Config;
+use Conf\Event;
+use Core\AbstractInterface\AbstractController;
+use Core\AbstractInterface\AbstractRouter;
+use Core\Component\Di;
+use Core\Component\SysConst;
+use Core\Http\Message\Status;
+use Core\Swoole\Server;
 use FastRoute\Dispatcher\GroupCountBased;
 
 class Dispatcher

@@ -6,7 +6,7 @@
  * Date: 2017/6/13
  * Time: 下午7:01
  */
-namespace TT\Core\Http\Message;
+namespace Core\Http\Message;
 
 class Message
 {

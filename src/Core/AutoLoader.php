@@ -5,7 +5,7 @@
  * Date: 2018/3/9
  * Time: 上午9:46
  */
-namespace TT\Core;
+namespace Core;
 
 use Phalcon\Loader;
 

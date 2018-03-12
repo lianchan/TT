@@ -6,7 +6,7 @@
  * Time: 下午7:04
  */
 
-namespace TT\Core\AbstractInterface;
+namespace Core\AbstractInterface;
 
 
 interface ExceptionHandlerInterface

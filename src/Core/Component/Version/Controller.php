@@ -6,11 +6,11 @@
  * Time: 下午9:52
  */
 
-namespace TT\Core\Component\Version;
+namespace Core\Component\Version;
 
 
-use TT\Core\Http\Request;
-use TT\Core\Http\UrlParser;
+use Core\Http\Request;
+use Core\Http\UrlParser;
 use FastRoute\Dispatcher;
 
 class Controller

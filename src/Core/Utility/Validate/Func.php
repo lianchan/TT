@@ -6,11 +6,11 @@
  * Time: 下午2:48
  */
 
-namespace TT\Core\Utility\Validate;
+namespace Core\Utility\Validate;
 
 
-use TT\Core\Component\Spl\SplArray;
-use TT\Core\Utility\Judge;
+use Core\Component\Spl\SplArray;
+use Core\Utility\Judge;
 
 class Func
 {

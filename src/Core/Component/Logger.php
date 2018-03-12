@@ -6,10 +6,10 @@
  * Time: 上午1:32
  */
 
-namespace TT\Core\Component;
+namespace Core\Component;
 
 
-use TT\Core\AbstractInterface\LoggerWriterInterface;
+use Core\AbstractInterface\LoggerWriterInterface;
 
 class Logger
 {

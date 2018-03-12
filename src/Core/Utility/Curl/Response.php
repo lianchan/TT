@@ -6,7 +6,7 @@
  * Time: 上午11:17
  */
 
-namespace TT\Core\Utility\Curl;
+namespace Core\Utility\Curl;
 
 
 class Response

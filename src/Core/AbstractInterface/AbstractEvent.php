@@ -6,11 +6,11 @@
  * Time: 下午11:57
  */
 
-namespace TT\Core\AbstractInterface;
+namespace Core\AbstractInterface;
 
 
-use TT\Core\Http\Request;
-use TT\Core\Http\Response;
+use Core\Http\Request;
+use Core\Http\Response;
 
 abstract class AbstractEvent
 {

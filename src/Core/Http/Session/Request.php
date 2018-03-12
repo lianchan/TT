@@ -6,7 +6,7 @@
  * Time: 下午11:01
  */
 
-namespace TT\Core\Http\Session;
+namespace Core\Http\Session;
 
 
 class Request extends Base

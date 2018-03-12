@@ -6,10 +6,10 @@
  * Time: 下午5:20
  */
 
-namespace TT\Core\Component;
+namespace Core\Component;
 
 
-use TT\Core\Swoole\Server;
+use Core\Swoole\Server;
 
 class Barrier
 {

@@ -6,19 +6,19 @@
  * Time: 下午9:55
  */
 
-namespace TT\Core\Swoole;
+namespace Core\Swoole;
 
-use TT\Conf\Event;
-use TT\Core\AbstractInterface\AbstractAsyncTask;
-use TT\Core\AbstractInterface\HttpExceptionHandlerInterface;
-use TT\Core\Component\Di;
-use TT\Core\Component\Error\Trigger;
-use TT\Core\Component\SuperClosure;
-use TT\Core\Component\SysConst;
-use TT\Core\Http\Dispatcher;
-use TT\Core\Http\Request;
-use TT\Core\Http\Response;
-use TT\Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
+use Conf\Event;
+use Core\AbstractInterface\AbstractAsyncTask;
+use Core\AbstractInterface\HttpExceptionHandlerInterface;
+use Core\Component\Di;
+use Core\Component\Error\Trigger;
+use Core\Component\SuperClosure;
+use Core\Component\SysConst;
+use Core\Http\Dispatcher;
+use Core\Http\Request;
+use Core\Http\Response;
+use Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
 
 use Phalcon\Mvc\Application;
 use Phalcon\Config\Adapter\Ini as ConfigIni;

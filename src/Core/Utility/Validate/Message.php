@@ -6,7 +6,7 @@
  * Time: 上午11:39
  */
 
-namespace TT\Core\Utility\Validate;
+namespace Core\Utility\Validate;
 
 
 class Message

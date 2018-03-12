@@ -6,7 +6,7 @@
  * Time: 下午12:32
  */
 
-namespace TT\Core\Http\Message;
+namespace Core\Http\Message;
 
 
 class Uri

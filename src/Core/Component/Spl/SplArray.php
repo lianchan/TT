@@ -6,7 +6,7 @@
  * Time: 下午3:01
  */
 
-namespace TT\Core\Component\Spl;
+namespace Core\Component\Spl;
 
 
 class SplArray extends \ArrayObject

@@ -6,17 +6,17 @@
  * Time: 下午2:31
  */
 
-namespace TT\Core\Component\Socket;
+namespace Core\Component\Socket;
 
 
-use TT\Core\Component\Socket\AbstractInterface\AbstractClient;
-use TT\Core\Component\Socket\AbstractInterface\AbstractCommandParser;
-use TT\Core\Component\Socket\AbstractInterface\AbstractCommandRegister;
-use TT\Core\Component\Socket\Client\TcpClient;
-use TT\Core\Component\Socket\Client\UdpClient;
-use TT\Core\Component\Socket\Common\Command;
-use TT\Core\Component\Socket\Common\CommandList;
-use TT\Core\Swoole\Server;
+use Core\Component\Socket\AbstractInterface\AbstractClient;
+use Core\Component\Socket\AbstractInterface\AbstractCommandParser;
+use Core\Component\Socket\AbstractInterface\AbstractCommandRegister;
+use Core\Component\Socket\Client\TcpClient;
+use Core\Component\Socket\Client\UdpClient;
+use Core\Component\Socket\Common\Command;
+use Core\Component\Socket\Common\CommandList;
+use Core\Swoole\Server;
 
 
 class Dispatcher

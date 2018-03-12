@@ -6,10 +6,10 @@
  * Time: 下午5:46
  */
 
-namespace TT\Core\Component\Socket\AbstractInterface;
+namespace Core\Component\Socket\AbstractInterface;
 
 
-use TT\Core\Component\Spl\SplBean;
+use Core\Component\Spl\SplBean;
 
 abstract class AbstractClient extends SplBean
 {

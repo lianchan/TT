@@ -6,10 +6,10 @@
  * Time: 下午9:25
  */
 
-namespace TT\Core\Utility\Validate;
+namespace Core\Utility\Validate;
 
 
-use TT\Core\Component\Spl\SplArray;
+use Core\Component\Spl\SplArray;
 
 class Validate
 {

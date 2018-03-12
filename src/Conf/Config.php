@@ -6,11 +6,11 @@
  * Date: 16/8/25
  * Time: 上午12:05
  */
-namespace TT\Conf;
+namespace Conf;
 
-use TT\Core\Component\Di;
-use TT\Core\Component\Spl\SplArray;
-use TT\Core\Component\Sys\SysConst;
+use Core\Component\Di;
+use Core\Component\Spl\SplArray;
+use Core\Component\Sys\SysConst;
 
 class Config
 {
@@ -44,8 +44,8 @@ class Config
                 "SERVER_NAME"    => "easyswoole",
                 "PORT"           => 9501,
                 "RUN_MODE"       => SWOOLE_PROCESS,//不建议更改此项
-                 "SERVER_TYPE" => \TT\Core\Swoole\Config::SERVER_TYPE_WEB,//
-//                "SERVER_TYPE"    => TT\Core\Swoole\Config::SERVER_TYPE_WEB_SOCKET,// 直播打开
+                 "SERVER_TYPE" => \Core\Swoole\Config::SERVER_TYPE_WEB,//
+//                "SERVER_TYPE"    => Core\Swoole\Config::SERVER_TYPE_WEB_SOCKET,// 直播打开
 //                'SOCKET_TYPE'    => SWOOLE_TCP,//当SERVER_TYPE为SERVER_TYPE_SERVER模式时有效
                 "CONFIG"=>array(
                     'user'             => USER, //当前用户

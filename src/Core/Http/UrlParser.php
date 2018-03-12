@@ -6,7 +6,7 @@
  * Time: 上午12:46
  */
 
-namespace TT\Core\Http;
+namespace Core\Http;
 
 
 class UrlParser

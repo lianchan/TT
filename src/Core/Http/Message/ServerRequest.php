@@ -6,7 +6,7 @@
  * Time: 下午1:44
  */
 
-namespace TT\Core\Http\Message;
+namespace Core\Http\Message;
 
 
 class ServerRequest extends Request

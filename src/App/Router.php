@@ -9,9 +9,9 @@
 namespace App;
 
 
-use TT\Core\AbstractInterface\AbstractRouter;
-use TT\Core\Component\Logger;
-use TT\Core\Http\Response;
+use Core\AbstractInterface\AbstractRouter;
+use Core\Component\Logger;
+use Core\Http\Response;
 use Phalcon\Mvc\Router as PhalconRouter;
 
 class Router extends AbstractRouter

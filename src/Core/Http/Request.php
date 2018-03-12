@@ -6,14 +6,14 @@
  * Time: 下午8:05
  */
 
-namespace TT\Core\Http;
+namespace Core\Http;
 
-use TT\Core\Http\Message\ServerRequest;
-use TT\Core\Http\Message\Stream;
-use TT\Core\Http\Message\UploadFile;
-use TT\Core\Http\Message\Uri;
-use TT\Core\Utility\Validate\Validate;
-use TT\Core\Http\Session\Request as SessionRequest;
+use Core\Http\Message\ServerRequest;
+use Core\Http\Message\Stream;
+use Core\Http\Message\UploadFile;
+use Core\Http\Message\Uri;
+use Core\Utility\Validate\Validate;
+use Core\Http\Session\Request as SessionRequest;
 
 class Request extends ServerRequest
 {

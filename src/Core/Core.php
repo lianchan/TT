@@ -6,21 +6,21 @@
  * Time: 下午9:54
  */
 
-namespace TT\Core;
+namespace Core;
 
 
-use TT\Conf\Config;
-use TT\Conf\Event;
-use TT\Core\AbstractInterface\ErrorHandlerInterface;
-use TT\Core\Component\Di;
-use TT\Core\Component\Error\Trigger;
-use TT\Core\Component\Sys\ErrorHandler;
-use TT\Core\Component\Spl\SplError;
-use TT\Core\Component\SysConst;
-use TT\Core\Http\Request;
-use TT\Core\Http\Response;
-use TT\Core\Swoole\Server;
-use TT\Core\Utility\File;
+use Conf\Config;
+use Conf\Event;
+use Core\AbstractInterface\ErrorHandlerInterface;
+use Core\Component\Di;
+use Core\Component\Error\Trigger;
+use Core\Component\Sys\ErrorHandler;
+use Core\Component\Spl\SplError;
+use Core\Component\SysConst;
+use Core\Http\Request;
+use Core\Http\Response;
+use Core\Swoole\Server;
+use Core\Utility\File;
 
 
 class Core
@@ -98,9 +98,9 @@ class Core
         $loader = AutoLoader::getInstance();
         $loader->registerNamespaces(
             [
-                'TT\Core' => ROOT . "/Core/",
-                'TT\Conf' => ROOT . "/Conf/",
-                'TT\Base' => ROOT . "/Base/",
+                'Core' => ROOT . "/Core/",
+                'Conf' => ROOT . "/Conf/",
+                'Base' => ROOT . "/Base/",
             ]
         );
         $loader->register();

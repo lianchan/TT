@@ -6,7 +6,7 @@
  * Time: 下午11:45
  */
 
-namespace TT\Core\Component\Socket;
+namespace Core\Component\Socket;
 
 
 class Type

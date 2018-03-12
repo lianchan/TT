@@ -6,7 +6,7 @@
  * Time: 下午7:46
  */
 
-namespace TT\Core\AbstractInterface;
+namespace Core\AbstractInterface;
 
 
 interface LoggerWriterInterface

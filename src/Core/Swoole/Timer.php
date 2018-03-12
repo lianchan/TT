@@ -6,7 +6,7 @@
  * Time: 下午12:33
  */
 
-namespace TT\Core\Swoole;
+namespace Core\Swoole;
 
 
 class Timer

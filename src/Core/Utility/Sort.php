@@ -6,7 +6,7 @@
 	 * Time: 15:22
 	 */
 
-	namespace TT\Core\Utility;
+	namespace Core\Utility;
 
 
 	class Sort

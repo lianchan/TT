@@ -6,7 +6,7 @@
  * Time: 下午6:14
  */
 
-namespace TT\Core\Component\Socket\Common;
+namespace Core\Component\Socket\Common;
 
 
 class Command

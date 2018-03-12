@@ -6,10 +6,10 @@
  * Time: 下午2:34
  */
 
-namespace TT\Core\Component\RPC\Common;
+namespace Core\Component\RPC\Common;
 
 
-use TT\Core\Component\Spl\SplBean;
+use Core\Component\Spl\SplBean;
 
 class Package extends SplBean
 {

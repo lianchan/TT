@@ -6,7 +6,7 @@
  * Time: 下午10:50
  */
 
-namespace TT\Core\Utility\Curl;
+namespace Core\Utility\Curl;
 
 
 class Cookie

@@ -6,7 +6,7 @@
  * Time: 下午1:28
  */
 
-namespace TT\Core\Http\Message;
+namespace Core\Http\Message;
 
 
 class Status

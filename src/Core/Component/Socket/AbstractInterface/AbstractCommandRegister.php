@@ -6,10 +6,10 @@
  * Time: 下午2:45
  */
 
-namespace TT\Core\Component\Socket\AbstractInterface;
+namespace Core\Component\Socket\AbstractInterface;
 
 
-use TT\Core\Component\Socket\Common\CommandList;
+use Core\Component\Socket\Common\CommandList;
 
 abstract class AbstractCommandRegister
 {

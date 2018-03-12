@@ -5,7 +5,7 @@
  * Date: 2017/1/23
  * Time: 上午1:07
  */
-namespace TT\Base\AbstractInterface;
+namespace Base\AbstractInterface;
 
 use think\Model;
 

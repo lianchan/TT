@@ -6,7 +6,7 @@
  * Time: 下午3:50
  */
 
-namespace TT\Core\Component\IO;
+namespace Core\Component\IO;
 
 
 class Stream

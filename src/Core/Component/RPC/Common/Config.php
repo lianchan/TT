@@ -6,10 +6,10 @@
  * Time: 下午1:20
  */
 
-namespace TT\Core\Component\RPC\Common;
+namespace Core\Component\RPC\Common;
 
 
-use TT\Core\Component\Spl\SplBean;
+use Core\Component\Spl\SplBean;
 
 class Config extends SplBean
 {

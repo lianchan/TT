@@ -6,13 +6,13 @@
  * Time: 下午10:20
  */
 
-namespace TT\Core\Component\Socket;
+namespace Core\Component\Socket;
 
 
-use TT\Core\Component\Socket\AbstractInterface\AbstractClient;
-use TT\Core\Component\Socket\Client\TcpClient;
-use TT\Core\Component\Socket\Client\UdpClient;
-use TT\Core\Swoole\Server;
+use Core\Component\Socket\AbstractInterface\AbstractClient;
+use Core\Component\Socket\Client\TcpClient;
+use Core\Component\Socket\Client\UdpClient;
+use Core\Swoole\Server;
 
 class Response
 {

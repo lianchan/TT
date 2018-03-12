@@ -6,7 +6,7 @@
  * Time: 下午11:30
  */
 
-namespace TT\Core\Utility\Curl;
+namespace Core\Utility\Curl;
 
 
 class Multi

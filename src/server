@@ -10,7 +10,7 @@
 require_once 'Core/Core.php';
 require_once realpath(dirname(dirname(__FILE__))) . '/app/config/env.php';
 
-$server = TT\Core\Core::getInstance()->frameWorkInitialize();
+$server = Core\Core::getInstance()->frameWorkInitialize();
 function commandParser(){
     global $argv;
     $command = '';
@@ -61,7 +61,7 @@ function commandHandler(){
 //            break;
 //        }
         case 'version':{
-            echo TT\Core\Component\DI::getInstance()->get(TT\Core\Component\SysConst::VERSION);
+            echo Core\Component\DI::getInstance()->get(Core\Component\SysConst::VERSION);
             echo PHP_EOL;
             break;
         }
@@ -86,7 +86,7 @@ _.------------------------------------------------------------------._
     echo $logo.PHP_EOL;
     opCacheClear();
     global $server;
-    $conf = TT\Conf\Config::getInstance();
+    $conf = Conf\Config::getInstance();
     if(isset($options['ip'])){
         $conf->setConf("SERVER.LISTEN",$options['ip']);
     }
@@ -99,7 +99,7 @@ _.------------------------------------------------------------------._
 
     if(!empty($options['pid'])){
         $pidFile = $options['pid'];
-        TT\Conf\Config::getInstance()->setConf('SERVER.CONFIG.pid_file',$pidFile);
+        Conf\Config::getInstance()->setConf('SERVER.CONFIG.pid_file',$pidFile);
     }
 
     if(isset($options['workerNum'])){
@@ -129,7 +129,7 @@ _.------------------------------------------------------------------._
         $conf->setConf('SERVER.CONFIG.daemonize',true);
         $label = 'true';
     }else{
-        TT\Conf\Config::getInstance()->setConf('SERVER.CONFIG.pid_file',null);
+        Conf\Config::getInstance()->setConf('SERVER.CONFIG.pid_file',null);
     }
     echo "daemonize            {$label} ".PHP_EOL;
 
@@ -151,13 +151,13 @@ _.------------------------------------------------------------------._
     }
     echo 'debug display error  '.$label.PHP_EOL;
     echo 'swoole version       '.phpversion('swoole').PHP_EOL;
-    echo 'TT version           '.\TT\Core\Component\Di::getInstance()->get(\TT\Core\Component\SysConst::VERSION).PHP_EOL;
+    echo 'TT version           '.\Core\Component\Di::getInstance()->get(\Core\Component\SysConst::VERSION).PHP_EOL;
     $server->run();
 
 }
 
 function stopServer($options){
-    $pidFile = TT\Conf\Config::getInstance()->getConf('SERVER.CONFIG.pid_file');
+    $pidFile = Conf\Config::getInstance()->getConf('SERVER.CONFIG.pid_file');
     if(!empty($options['pid'])){
         $pidFile = $options['pid'];
     }
@@ -195,7 +195,7 @@ function stopServer($options){
 }
 
 function reloadServer($options){
-    $pidFile = TT\Conf\Config::getInstance()->getConf('SERVER.CONFIG.pid_file');
+    $pidFile = Conf\Config::getInstance()->getConf('SERVER.CONFIG.pid_file');
     if(isset($options['pid'])){
         if(!empty($options['pid'])){
             $pidFile = $options['pid'];

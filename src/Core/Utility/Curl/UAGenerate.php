@@ -7,13 +7,13 @@
 // | Author: eValor <mipone@foxmail.com>
 // +----------------------------------------------------------------------
 
-namespace TT\Core\Utility\Curl;
+namespace Core\Utility\Curl;
 
 /**
  * 爬虫UA随机生成器
  * Class UAGenerate
  * @author : evalor <master@evalor.cn>
- * @package TT\Core\Utility\Curl
+ * @package Core\Utility\Curl
  */
 class UAGenerate
 {

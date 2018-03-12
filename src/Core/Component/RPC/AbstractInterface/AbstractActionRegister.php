@@ -6,10 +6,10 @@
  * Time: 下午4:21
  */
 
-namespace TT\Core\Component\RPC\AbstractInterface;
+namespace Core\Component\RPC\AbstractInterface;
 
 
-use TT\Core\Component\RPC\Common\ActionList;
+use Core\Component\RPC\Common\ActionList;
 
 abstract class AbstractActionRegister
 {

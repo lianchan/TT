@@ -6,12 +6,12 @@
  * Time: 下午5:49
  */
 
-namespace TT\Core\Component\Socket\AbstractInterface;
+namespace Core\Component\Socket\AbstractInterface;
 
 
 
-use TT\Core\Component\RPC\Client\Client;
-use TT\Core\Component\Socket\Common\Command;
+use Core\Component\RPC\Client\Client;
+use Core\Component\Socket\Common\Command;
 
 abstract class AbstractCommandParser
 {

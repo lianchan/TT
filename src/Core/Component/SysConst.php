@@ -6,7 +6,7 @@
  * Time: 下午12:22
  */
 
-namespace TT\Core\Component;
+namespace Core\Component;
 
 
 class SysConst

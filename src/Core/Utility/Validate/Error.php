@@ -6,7 +6,7 @@
  * Time: 上午11:56
  */
 
-namespace TT\Core\Utility\Validate;
+namespace Core\Utility\Validate;
 
 
 class Error

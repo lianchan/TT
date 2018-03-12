@@ -6,7 +6,7 @@
  * Time: 上午12:23
  */
 
-namespace TT\Core\Component;
+namespace Core\Component;
 
 use Phalcon\DI\FactoryDefault as PhalconDi;
 

@@ -6,10 +6,10 @@
  * Time: 下午1:46
  */
 
-namespace TT\Core\Swoole\Pipe;
+namespace Core\Swoole\Pipe;
 
 
-use TT\Core\Swoole\Server;
+use Core\Swoole\Server;
 
 class Send
 {
