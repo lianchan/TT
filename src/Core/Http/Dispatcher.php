@@ -54,6 +54,8 @@ class Dispatcher
             return $response->end(true);
         }
         $_SERVER = $request2->server;
+        $_COOKIE = $request2->cookie;
+
         //构造url请求路径,phalcon获取到$_GET['_url']时会定向到对应的路径，否则请求路径为'/'
         $_GET['_url'] = $request2->server['request_uri'];
         if ($request2->server['request_method'] == 'GET' && isset($request2->get)) {
