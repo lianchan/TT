@@ -65,33 +65,33 @@ class Core
         defined('USER') or define('USER',trim(shell_exec('whoami')));
         defined('USER_GROUP') or define('USER_GROUP',trim(shell_exec('groups '.USER)));
     }
-//    private function sysDirectoryInit(){
-//        //创建临时目录
-//        $tempDir = Di::getInstance()->get(SysConst::TEMP_DIRECTORY);
-//        if(empty($tempDir)){
-//            $tempDir = ROOT."/Temp";
-//            Di::getInstance()->set(SysConst::TEMP_DIRECTORY,$tempDir);
-//        }
-//        if(!File::createDir($tempDir)){
-//            die("create Temp Directory:{$tempDir} fail");
-//        }else{
-//            //创建默认Session存储目录
-//            $path = $tempDir."/Session";
-//            File::createDir($path);
-//            Di::getInstance()->set(SysConst::SESSION_SAVE_PATH,$path);
-//        }
-//        //创建日志目录
-//        $logDir = Di::getInstance()->get(SysConst::LOG_DIRECTORY);
-//        if(empty($logDir)){
-//            $logDir = ROOT."/Log";
-//            Di::getInstance()->set(SysConst::LOG_DIRECTORY,$logDir);
-//        }
-//        if(!File::createDir($logDir)){
-//            die("create log Directory:{$logDir} fail");
-//        }
-//        Config::getInstance()->setConf("SERVER.CONFIG.log_file",$logDir."/swoole.log");
-//        Config::getInstance()->setConf("SERVER.CONFIG.pid_file",$logDir."/pid.pid");
-//    }
+    private function sysDirectoryInit(){
+        //创建临时目录
+        $tempDir = Di::getInstance()->get(SysConst::TEMP_DIRECTORY);
+        if(empty($tempDir)){
+            $tempDir = ROOT."/Temp";
+            Di::getInstance()->set(SysConst::TEMP_DIRECTORY,$tempDir);
+        }
+        if(!File::createDir($tempDir)){
+            die("create Temp Directory:{$tempDir} fail");
+        }else{
+            //创建默认Session存储目录
+            $path = $tempDir."/Session";
+            File::createDir($path);
+            Di::getInstance()->set(SysConst::SESSION_SAVE_PATH,$path);
+        }
+        //创建日志目录
+        $logDir = Di::getInstance()->get(SysConst::LOG_DIRECTORY);
+        if(empty($logDir)){
+            $logDir = ROOT."/Log";
+            Di::getInstance()->set(SysConst::LOG_DIRECTORY,$logDir);
+        }
+        if(!File::createDir($logDir)){
+            die("create log Directory:{$logDir} fail");
+        }
+        Config::getInstance()->setConf("SERVER.CONFIG.log_file",$logDir."/swoole.log");
+        Config::getInstance()->setConf("SERVER.CONFIG.pid_file",$logDir."/pid.pid");
+    }
 
     private static function registerAutoLoader(){
         require_once __DIR__."/AutoLoader.php";

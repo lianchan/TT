@@ -47,19 +47,6 @@ function commandHandler(){
             reloadServer($command['options']);
             break;
         }
-//        case 'update':{
-//            echo "start download".PHP_EOL;
-//            exec('curl -sS -o master.tar.gz https://codeload.github.com/kiss291323003/easyswoole/tar.gz/master');
-//            echo "download success".PHP_EOL;
-//            exec('tar -xzvf master.tar.gz');
-//            exec('rm -rf ./Core');
-//            exec('rm -rf ./server');
-//            exec('mv ./easyswoole-master/src/Core ./');
-//            exec('mv ./easyswoole-master/src/server ./');
-//            exec('rm -rf ./easyswoole-master master.tar.gz');
-//            echo "update success".PHP_EOL;
-//            break;
-//        }
         case 'version':{
             echo Core\Component\DI::getInstance()->get(Core\Component\SysConst::VERSION);
             echo PHP_EOL;
@@ -255,17 +242,12 @@ function help($options){
             echo "--pid-all             是否重启所有进程，默认true".PHP_EOL;
             break;
         }
-//        case 'update':{
-//            echo "------------easySwoole 更新命令------------".PHP_EOL;
-//            break;
-//        }
         default:{
             echo "------------欢迎使用easySwoole------------".PHP_EOL;
             echo "有关某个命令的详细信息，请使用 help 命令, 如help --start 可选参数为:".PHP_EOL;
             echo "--start            启动easySwoole".PHP_EOL;
             echo "--stop             停止easySwoole".PHP_EOL;
             echo "--reload           重启easySwoole".PHP_EOL;
-            echo "--update           更新框架文件".PHP_EOL;
         }
     }
 }
