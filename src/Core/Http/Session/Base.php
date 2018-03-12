@@ -8,7 +8,6 @@
 
 namespace Core\Http\Session;
 
-
 class Base
 {
     protected $session;

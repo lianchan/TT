@@ -135,8 +135,6 @@ class Server
             echo 'taskworker --> '.$this->swooleServer->taskworker . PHP_EOL;
             echo 'connections --> '.$this->swooleServer->connections . PHP_EOL;
             echo date('Y-m-d H:i:s') . PHP_EOL;
-//            echo 'get -------> ' . PHP_EOL;
-//            echo $request->get . PHP_EOL;
 
             $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);
@@ -154,9 +152,6 @@ class Server
             }
             $response2->end(true);
         });
-//        $this->getServer()->on('close',function () {
-//            var_dump('swoole_http_server closed');
-//        });
     }
     private function workerStartEvent(){
         $this->getServer()->on("workerStart",function (\swoole_server $server, $workerId){
