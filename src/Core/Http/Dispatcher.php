@@ -49,13 +49,10 @@ class Dispatcher
         $request2 = $request->getSwooleRequest();
         $phalconApplication = Server::getInstance()->getPhalconApplication();
 
-//        var_dump(Di::getInstance());
-
-//        $cache = Di::getInstance()->getShared('cacheMemcache');
-//        var_dump($cache);
+        $cache = $phalconApplication->getDI()->get('cacheMemcache');
 //        $cache->save("my-data", [1, 2, 3, 4, 5]);
-//        $data = $cache->get("my-data");
-//        var_dump($data);
+        $data = $cache->get("my-data");
+        var_dump($data);
 
 //        $session = $response->session();
 //        $session->set('uuid', 888);

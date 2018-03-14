@@ -57,11 +57,11 @@ class Server
     function isStart(){
         return $this->isStart;
     }
-    /*
-     * 创建并启动一个swoole http server
-     */
-    function startServer(){
 
+    /**
+     * 注册 phalcon application
+     */
+    function registerPhalconApplication(){
         try {
             /**
              * Read the configuration
@@ -79,21 +79,18 @@ class Server
              * Load application services
              */
             require APP_PATH . 'config/services.php';
-//            Di::setInstance($di);
             $this->phalconApplication = new Application($di);
             $this->phalconApplication->setEventsManager($eventsManager);
-            $sessionName = Di::getInstance()->get(SysConst::SESSION_NAME);
-            var_dump($sessionName);
-//            var_dump($di);
-//            foreach ($di as $Di) {
-//                var_dump($Di);
-//            }
-
         } catch (\Exception $e){
             echo $e->getMessage() . '<br>';
             echo '<pre>' . $e->getTraceAsString() . '</pre>';
         }
+    }
 
+    /*
+     * 创建并启动一个swoole http server
+     */
+    function startServer(){
         $conf = Config::getInstance();
         $this->getServer()->set($conf->getWorkerSetting());
         $this->beforeWorkerStart();

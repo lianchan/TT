@@ -39,6 +39,7 @@ class Core
     }
 
     function run(){
+        Server::getInstance()->registerPhalconApplication();
         Server::getInstance()->startServer();
     }
 
@@ -135,32 +136,5 @@ class Core
         Di::getInstance()->set(SysConst::VERSION, function () {
             return '0.0.1';
         }, true);
-
-
-//        Di::getInstance()->setShared('cacheMemcache', function () {
-//            $frontCache = new FrontData(
-//                [
-//                    "lifetime" => 86400,
-//                ]
-//            );
-//            $cache = new Libmemcached(
-//                $frontCache,
-//                [
-//                    "servers" => [
-//                        [
-//                            "host"   => '127.0.0.1',
-//                            "port"   => 11211,
-//                            "weight" => 1,
-//                        ],
-//                    ],
-//                    "client" => [
-//                        \Memcached::OPT_HASH       => \Memcached::HASH_MD5,
-//                        \Memcached::OPT_PREFIX_KEY => "prefix.",
-//                    ],
-//                    "prefix"   => 'home_',
-//                ]
-//            );
-//            return $cache;
-//        });
     }
 }
