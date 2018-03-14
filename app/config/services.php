@@ -9,6 +9,8 @@ use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaData;
+use Phalcon\Cache\Backend\Libmemcached;
+use Phalcon\Cache\Frontend\Data as FrontData;
 use Phalcon\Session\Adapter\Libmemcached as SessionAdapter;
 use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Events\Manager as EventsManager;
@@ -135,6 +137,32 @@ $di->setShared('db', function () use ($config) {
  */
 $di->set('modelsMetadata', function () {
     return new MetaData;
+});
+
+$di->setShared('cacheMemcache', function () {
+    $frontCache = new FrontData(
+        [
+            "lifetime" => 86400,
+        ]
+    );
+    $cache = new Libmemcached(
+        $frontCache,
+        [
+            "servers" => [
+                [
+                    "host"   => '127.0.0.1',
+                    "port"   => 11211,
+                    "weight" => 1,
+                ],
+            ],
+            "client" => [
+                \Memcached::OPT_HASH       => \Memcached::HASH_MD5,
+                \Memcached::OPT_PREFIX_KEY => "prefix.",
+            ],
+            "prefix"   => 'home_',
+        ]
+    );
+    return $cache;
 });
 
 ///**

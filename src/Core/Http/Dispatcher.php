@@ -47,11 +47,19 @@ class Dispatcher
         $request = Request::getInstance();
         $response = Response::getInstance();
         $request2 = $request->getSwooleRequest();
-        $phalcon_application = Server::getInstance()->getPhalconApplication();
+        $phalconApplication = Server::getInstance()->getPhalconApplication();
 
-        $session = $response->session();
-        var_dump($session->get('auth'));
+//        var_dump(Di::getInstance());
+
+//        $cache = Di::getInstance()->getShared('cacheMemcache');
+//        var_dump($cache);
+//        $cache->save("my-data", [1, 2, 3, 4, 5]);
+//        $data = $cache->get("my-data");
+//        var_dump($data);
+
+//        $session = $response->session();
 //        $session->set('uuid', 888);
+//        var_dump($session->get('auth'));
 //        var_dump($session->get('uuid'));
 
         //注册捕获错误函数
@@ -77,9 +85,9 @@ class Dispatcher
             }
         }
         if (APPLICATION_ENV == APP_TEST) {
-            return $phalcon_application;
+            return $phalconApplication;
         } else {
-            $response->write($phalcon_application->handle()->getContent());
+            $response->write($phalconApplication->handle()->getContent());
         }
     }
 

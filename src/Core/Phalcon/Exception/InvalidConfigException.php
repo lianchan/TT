@@ -1,6 +1,6 @@
 <?php
 
-namespace Phwoolcon\Exception;
+namespace Core\Phalcon\Exception;
 
 use InvalidArgumentException;
 
