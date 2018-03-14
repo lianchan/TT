@@ -41,9 +41,8 @@ class Dispatcher
 
     function dispatch(){
         if(Response::getInstance()->isEndResponse()){
-            return;
+            return false;
         }
-
         $request = Request::getInstance();
         $response = Response::getInstance();
         $request2 = $request->getSwooleRequest();
