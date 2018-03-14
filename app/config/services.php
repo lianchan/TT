@@ -9,7 +9,7 @@ use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaData;
-use Phalcon\Session\Adapter\Files as SessionAdapter;
+use Phalcon\Session\Adapter\Libmemcached as SessionAdapter;
 use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Events\Manager as EventsManager;
 use TTDemo\Library\Elements;
@@ -22,6 +22,8 @@ use Phalcon\Mvc\Router;
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
 $di = new FactoryDefault;
+
+$di->setShared('config', $config);
 
 $eventsManager = new EventsManager;
 
@@ -135,13 +137,36 @@ $di->set('modelsMetadata', function () {
     return new MetaData;
 });
 
-/**
- * Start the session the first time some component request the session service
- */
-$di->set('session', function () {
-    $session = new SessionAdapter;
-    $session->start();
+///**
+// * Start the session the first time some component request the session service
+// */
+//$di->set('session', function () {
+//    $session = new SessionAdapter;
+//    $session->start();
+//
+//    return $session;
+//});
 
+//Isolating the session data
+$di->setShared('session', function () use ($config) {
+    $session = new SessionAdapter(
+        [
+            "servers" => [
+                [
+                    "host"   => '127.0.0.1',
+                    "port"   => 11211,
+                    "weight" => 1,
+                ],
+            ],
+            "client" => [
+                \Memcached::OPT_HASH       => \Memcached::HASH_MD5,
+                \Memcached::OPT_PREFIX_KEY => "prefix.",
+            ],
+            "lifetime" => 86400,
+            "prefix"   => 'home_',
+        ]
+    );
+    $session->start();
     return $session;
 });
 

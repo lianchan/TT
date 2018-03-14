@@ -14,6 +14,8 @@ use Core\Http\Message\Status;
 use Core\Http\Session\Response as SessionResponse;
 use Core\Http\Session\Session;
 use Core\Utility\Curl\Cookie;
+use Core\Component\Di;
+
 
 class Response extends HttpResponse
 {
@@ -151,10 +153,17 @@ class Response extends HttpResponse
 
     function session(){
         if(!isset($this->session)){
-            $this->session = new SessionResponse();
+            $this->session = Di::getInstance()->get('session');
         }
         return $this->session;
     }
+
+//    function session(){
+//        if(!isset($this->session)){
+//            $this->session = new SessionResponse();
+//        }
+//        return $this->session;
+//    }
 
     function getSwooleResponse(){
         return $this->swoole_http_response;

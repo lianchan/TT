@@ -17,7 +17,8 @@ use Core\Component\Di;
 use Core\Component\SysConst;
 use Core\Http\Message\Status;
 use Core\Swoole\Server;
-use FastRoute\Dispatcher\GroupCountBased;
+use Core\Phalcon\Events;
+
 
 class Dispatcher
 {
@@ -47,6 +48,11 @@ class Dispatcher
         $response = Response::getInstance();
         $request2 = $request->getSwooleRequest();
         $phalcon_application = Server::getInstance()->getPhalconApplication();
+
+        $session = $response->session();
+        var_dump($session->get('auth'));
+//        $session->set('uuid', 888);
+//        var_dump($session->get('uuid'));
 
         //注册捕获错误函数
 //        register_shutdown_function(array($this, 'handleFatal'));
