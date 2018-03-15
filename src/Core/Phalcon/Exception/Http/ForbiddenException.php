@@ -1,7 +1,7 @@
 <?php
-namespace Phwoolcon\Exception\Http;
+namespace Core\Phalcon\Exception\Http;
 
-use Phwoolcon\Exception\HttpException;
+use Core\Phalcon\Exception\HttpException;
 
 /**
  * Throw this exception to terminate execution and response a 403 forbidden

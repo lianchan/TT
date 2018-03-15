@@ -1,6 +1,6 @@
 <?php
 
-namespace Phwoolcon\Exception\Http;
+namespace Core\Phalcon\Exception\Http;
 
 /**
  * Throw this exception to terminate execution and response a 403 forbidden when CSRF verification failed

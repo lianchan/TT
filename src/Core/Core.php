@@ -40,6 +40,7 @@ class Core
 
     function run(){
         Server::getInstance()->registerPhalconApplication();
+        Server::getInstance()->registerPhalconDi();
         Server::getInstance()->startServer();
     }
 

@@ -2,8 +2,8 @@
 
 namespace Core\Phalcon\Session;
 
-use Core\Utility\Curl\PhalconCookies as Cookies;
-use Phwoolcon\Text;
+use Core\Phalcon\Cookies;
+use Core\Phalcon\Text;
 
 /**
  * Class AdapterTrait

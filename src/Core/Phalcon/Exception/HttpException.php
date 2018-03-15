@@ -1,5 +1,5 @@
 <?php
-namespace Phwoolcon\Exception;
+namespace Core\Phalcon\Exception;
 
 use Phalcon\Http\Response;
 use RuntimeException;

@@ -23,6 +23,10 @@ use Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
 use Phalcon\Mvc\Application;
 use Phalcon\Config\Adapter\Ini as ConfigIni;
 
+use Core\Phalcon\Session as PhalconSession;
+use Core\Phalcon\Events as PhalconEvents;
+use Core\Phalcon\Config as PhalconConfig;
+
 class Server
 {
     protected static $instance;
@@ -81,10 +85,30 @@ class Server
             require APP_PATH . 'config/services.php';
             $this->phalconApplication = new Application($di);
             $this->phalconApplication->setEventsManager($eventsManager);
+
         } catch (\Exception $e){
-            echo $e->getMessage() . '<br>';
-            echo '<pre>' . $e->getTraceAsString() . '</pre>';
+            echo $e->getMessage();
+            echo $e->getTraceAsString();
         }
+    }
+
+    function registerPhalconDi(){
+        $di = $this->phalconApplication->getDI();
+        PhalconConfig::register($di);
+        PhalconEvents::register($di);
+        PhalconSession::register($di);
+        PhalconSession::start();
+        PhalconEvents::attach('router:matchedRoute', function (\Phalcon\Events\Event $event) {
+            var_dump('session_id --> '.PhalconSession::getId());
+//                $this->debugData['session-id'] = json_encode(Session::getId());
+//                $this->debugData['session-data'] = json_encode(isset($_SESSION) ? $_SESSION : null);
+        });
+//            Events::attach('router:after_dispatch', function (Event $event) {
+//                var_dump('router:after_dispatch');
+//                var_dump(PhalconSession::getId());
+////                $this->debugData['session-id'] = json_encode(Session::getId());
+////                $this->debugData['session-data'] = json_encode(isset($_SESSION) ? $_SESSION : null);
+//            });
     }
 
     /*
@@ -131,14 +155,14 @@ class Server
         $this->getServer()->on("request",
             function (\swoole_http_request $request,\swoole_http_response $response){
 
-            echo '-------------------------------------------------------------' . PHP_EOL;
-            echo 'fd --> '.$request->fd . PHP_EOL;
-            echo 'master_pid --> '.$this->swooleServer->master_pid . PHP_EOL;
-            echo 'manager_pid --> '.$this->swooleServer->manager_pid . PHP_EOL;
-            echo 'worker_id --> '.$this->swooleServer->worker_id . PHP_EOL;
-            echo 'taskworker --> '.$this->swooleServer->taskworker . PHP_EOL;
-            echo 'connections --> '.$this->swooleServer->connections . PHP_EOL;
-            echo date('Y-m-d H:i:s') . PHP_EOL;
+            echo '-------------- start time '.date('Y-m-d H:i:s').' --------------' . PHP_EOL;
+            echo 'fd            '.$request->fd . PHP_EOL;
+            echo 'master_pid    '.$this->swooleServer->master_pid . PHP_EOL;
+            echo 'manager_pid   '.$this->swooleServer->manager_pid . PHP_EOL;
+            echo 'worker_id     '.$this->swooleServer->worker_id . PHP_EOL;
+            echo 'taskworker    '.$this->swooleServer->taskworker . PHP_EOL;
+            echo 'connections   '.$this->swooleServer->connections . PHP_EOL;
+            echo '-------------- end time '.date('Y-m-d H:i:s').' --------------' . PHP_EOL;
 
             $request2 = Request::getInstance($request);
             $response2 = Response::getInstance($response);

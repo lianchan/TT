@@ -82,30 +82,30 @@ class Session
     public static function register(Di $di)
     {
         static::$di = $di;
-        $di->remove('session');
-        static::$session = null;
-        $di->setShared('session', function () {
-            $default = Config::get('session.default');
-            $config = Config::get('session.drivers.' . $default);
-            $class = $config['adapter'];
-            $options = $config['options'];
-            $options += Config::get('session.options');
-            $options['cookies'] += Config::get('cookies');
-            session_name($options['cookies']['name']);
-            // @codeCoverageIgnoreStart
-            if (!$class || !class_exists($class)) {
-                $errorMessage = "Invalid session adapter {$class}, please check config file session.php";
-                throw new InvalidConfigException($errorMessage);
-            }
-            // @codeCoverageIgnoreEnd
-            $session = new $class($options);
-            // @codeCoverageIgnoreStart
-            if (!$session instanceof AdapterInterface) {
-                $errorMessage = "Session adapter {$class} should implement " . AdapterInterface::class;
-                throw new InvalidConfigException($errorMessage);
-            }
-            // @codeCoverageIgnoreEnd
-            return $session;
-        });
+//        $di->remove('session');
+//        static::$session = null;
+//        $di->setShared('session', function () {
+//            $default = Config::get('session.default');
+//            $config = Config::get('session.drivers.' . $default);
+//            $class = $config['adapter'];
+//            $options = $config['options'];
+//            $options += Config::get('session.options');
+//            $options['cookies'] += Config::get('cookies');
+//            session_name($options['cookies']['name']);
+//            // @codeCoverageIgnoreStart
+//            if (!$class || !class_exists($class)) {
+//                $errorMessage = "Invalid session adapter {$class}, please check config file session.php";
+//                throw new InvalidConfigException($errorMessage);
+//            }
+//            // @codeCoverageIgnoreEnd
+//            $session = new $class($options);
+//            // @codeCoverageIgnoreStart
+//            if (!$session instanceof AdapterInterface) {
+//                $errorMessage = "Session adapter {$class} should implement " . AdapterInterface::class;
+//                throw new InvalidConfigException($errorMessage);
+//            }
+//            // @codeCoverageIgnoreEnd
+//            return $session;
+//        });
     }
 }

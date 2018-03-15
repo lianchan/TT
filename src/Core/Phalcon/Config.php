@@ -57,7 +57,7 @@ class Config
 
     public static function register(Di $di)
     {
-        $environment = isset($_SERVER['PHWOOLCON_ENV']) ? $_SERVER['PHWOOLCON_ENV'] : 'production';
+        $environment = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : 'production';
         // @codeCoverageIgnoreStart
         if (is_file($cacheFile = storagePath('cache/config-' . $environment . '.php'))) {
             static::$config = include $cacheFile;
@@ -70,11 +70,11 @@ class Config
         $config = new PhalconConfig(static::$preloadConfig);
 
         // Load default configs
-        $defaultFiles = glob($_SERVER['PHWOOLCON_CONFIG_PATH'] . '/*.php');
+        $defaultFiles = glob($_SERVER['APP_CONFIG_PATH'] . '/*.php');
         $config->merge(new PhalconConfig(static::loadFiles($defaultFiles)));
 
         // Load override configs
-        $overrideDirs = glob($_SERVER['PHWOOLCON_CONFIG_PATH'] . '/override-*/');
+        $overrideDirs = glob($_SERVER['APP_CONFIG_PATH'] . '/override-*/');
         foreach ($overrideDirs as $overrideDir) {
             $overrideFiles = glob($overrideDir . '*.php');
             $overrideSettings = static::loadFiles($overrideFiles);
@@ -83,7 +83,7 @@ class Config
         }
 
         // Load environment configs
-        $environmentFiles = glob($_SERVER['PHWOOLCON_CONFIG_PATH'] . '/' . $environment . '/*.php');
+        $environmentFiles = glob($_SERVER['APP_CONFIG_PATH'] . '/' . $environment . '/*.php');
         $environmentSettings = static::loadFiles($environmentFiles);
         $environmentSettings['environment'] = $environment;
         $environmentConfig = new PhalconConfig($environmentSettings);
@@ -98,9 +98,9 @@ class Config
             is_dir($cacheDir = dirname($cacheFile)) or mkdir($cacheDir, 0777, true);
             fileSaveArray($cacheFile, static::$config, function ($content) {
                 $replacement = <<<'EOF'
-$_SERVER['PHWOOLCON_ROOT_PATH'] . '
+$_SERVER['APP_ROOT_PATH'] . '
 EOF;
-                return str_replace("'{$_SERVER['PHWOOLCON_ROOT_PATH']}", $replacement, $content);
+                return str_replace("'{$_SERVER['APP_ROOT_PATH']}", $replacement, $content);
             });
         }
         // @codeCoverageIgnoreEnd

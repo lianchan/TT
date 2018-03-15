@@ -68,9 +68,9 @@ class Service
         }
         // @codeCoverageIgnoreEnd
 
-        defined('PHWOOLCON_SERVICE_MODE') or define('PHWOOLCON_SERVICE_MODE', true);
+        defined('APP_SERVICE_MODE') or define('APP_SERVICE_MODE', true);
         foreach ($_SERVER as $k => $v) {
-            substr($k, 0, 10) == 'PHWOOLCON_' and $this->environmentVariables[$k] = $v;
+            substr($k, 0, 10) == 'APP_' and $this->environmentVariables[$k] = $v;
         }
         isset($config['buffer_output_size']) or $config['buffer_output_size'] = static::OUTPUT_BUFFER_SIZE;
         isset($config['chunk_output_size']) or $config['chunk_output_size'] = static::OUTPUT_CHUNK_SIZE;
