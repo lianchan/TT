@@ -45,7 +45,7 @@ class Cookies
     public static function register(Di $di)
     {
         static::$di = $di;
-        $di->set('Phalcon\\Http\\Cookie', 'Phwoolcon\\Http\\Cookie');
+        $di->set('Phalcon\\Http\\Cookie', 'Core\\Phalcon\\Http\\Cookie');
         static::$cookies = static::$di->getShared('cookies');
         static::$cookies->reset();
         static::$options = $options = Config::get('cookies');

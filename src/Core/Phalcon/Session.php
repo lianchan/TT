@@ -82,6 +82,8 @@ class Session
     public static function register(Di $di)
     {
         static::$di = $di;
+        return $di->getShared('session');
+//        static::$di = $di;
 //        $di->remove('session');
 //        static::$session = null;
 //        $di->setShared('session', function () {

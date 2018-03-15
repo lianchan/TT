@@ -15,15 +15,16 @@ use Core\Component\Di;
 use Core\Component\Error\Trigger;
 use Core\Component\SuperClosure;
 use Core\Component\SysConst;
-use Core\Http\Dispatcher;
-use Core\Http\Request;
-use Core\Http\Response;
+use Core\Http\Dispatcher as HttpDispatcher;
+use Core\Http\Request as HttpRequest;
+use Core\Http\Response as HttpResponse;
 use Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
 
-use Phalcon\Mvc\Application;
-use Phalcon\Config\Adapter\Ini as ConfigIni;
+use Phalcon\Mvc\Application as PhalconApplication;
+use Phalcon\Config\Adapter\Ini as PhalconConfigIni;
 
 use Core\Phalcon\Session as PhalconSession;
+use Core\Phalcon\Cookies as PhalconCookies;
 use Core\Phalcon\Events as PhalconEvents;
 use Core\Phalcon\Config as PhalconConfig;
 
@@ -70,9 +71,9 @@ class Server
             /**
              * Read the configuration
              */
-            $config = new ConfigIni(APP_PATH . 'config/config.ini');
+            $config = new PhalconConfigIni(APP_PATH . 'config/config.ini');
             if (is_readable(APP_PATH . 'config/config.ini.dev')) {
-                $override = new ConfigIni(APP_PATH . 'config/config.ini.dev');
+                $override = new PhalconConfigIni(APP_PATH . 'config/config.ini.dev');
                 $config->merge($override);
             }
             /**
@@ -83,7 +84,7 @@ class Server
              * Load application services
              */
             require APP_PATH . 'config/services.php';
-            $this->phalconApplication = new Application($di);
+            $this->phalconApplication = new PhalconApplication($di);
             $this->phalconApplication->setEventsManager($eventsManager);
 
         } catch (\Exception $e){
@@ -96,8 +97,9 @@ class Server
         $di = $this->phalconApplication->getDI();
         PhalconConfig::register($di);
         PhalconEvents::register($di);
+        PhalconCookies::register($di);
         PhalconSession::register($di);
-        PhalconSession::start();
+//        PhalconSession::start();
         PhalconEvents::attach('router:matchedRoute', function (\Phalcon\Events\Event $event) {
             var_dump('session_id --> '.PhalconSession::getId());
 //                $this->debugData['session-id'] = json_encode(Session::getId());
@@ -152,6 +154,10 @@ class Server
      */
     private function listenRequest(){
 
+//        $request2 = HttpRequest::getInstance();
+//        $response2 = HttpResponse::getInstance();
+//        $response2->session();
+
         $this->getServer()->on("request",
             function (\swoole_http_request $request,\swoole_http_response $response){
 
@@ -164,11 +170,12 @@ class Server
             echo 'connections   '.$this->swooleServer->connections . PHP_EOL;
             echo '-------------- end time '.date('Y-m-d H:i:s').' --------------' . PHP_EOL;
 
-            $request2 = Request::getInstance($request);
-            $response2 = Response::getInstance($response);
+            $request2 = HttpRequest::getInstance($request);
+            $response2 = HttpResponse::getInstance($response);
+
             try{
                 Event::getInstance()->onRequest($request2,$response2);
-                Dispatcher::getInstance()->dispatch();
+                HttpDispatcher::getInstance()->dispatch();
                 Event::getInstance()->onResponse($request2,$response2);
             }catch (\Exception $exception){
                 $handler = Di::getInstance()->get(SysConst::HTTP_EXCEPTION_HANDLER);

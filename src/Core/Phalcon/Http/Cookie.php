@@ -4,7 +4,7 @@ namespace Core\Phalcon\Http;
 use Phalcon\CryptInterface;
 use Phalcon\Di;
 use Phalcon\Http\Cookie as PhalconCookie;
-use Phwoolcon\Cache;
+use Core\Phalcon\Cache;
 use Core\Phalcon\Cookies;
 
 /**

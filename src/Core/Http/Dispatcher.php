@@ -18,6 +18,7 @@ use Core\Component\SysConst;
 use Core\Http\Message\Status;
 use Core\Swoole\Server;
 use Core\Phalcon\Events;
+use Core\Phalcon\Session as PhalconSession;
 
 
 class Dispatcher
@@ -58,6 +59,14 @@ class Dispatcher
 //        var_dump($session->get('auth'));
 //        var_dump($session->get('uuid'));
 
+//        $di = Di::getDefault();
+//        $di = $phalconApplication->getDI();
+////        $di = $this->phalconApplication->getDI();
+//        $session = $di->get('session');
+//        var_dump($session);
+
+        var_dump(PhalconSession::getId());
+
         //注册捕获错误函数
 //        register_shutdown_function(array($this, 'handleFatal'));
         if ($request2->server['request_uri'] == '/favicon.ico' || $request2->server['path_info'] == '/favicon.ico') {
@@ -65,6 +74,7 @@ class Dispatcher
         }
         $_SERVER = $request2->server;
         $_COOKIE = $request2->cookie;
+//        var_dump($_COOKIE);
 
         //构造url请求路径,phalcon获取到$_GET['_url']时会定向到对应的路径，否则请求路径为'/'
         $_GET['_url'] = $request2->server['request_uri'];
