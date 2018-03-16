@@ -62,7 +62,6 @@ class Dispatcher
         $session = $requestSession->get('test');
         var_dump($session);
 
-
 //        $session->set('uuid', 888);
 //        var_dump($session->get('auth'));
 //        var_dump($session->get('uuid'));

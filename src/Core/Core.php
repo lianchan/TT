@@ -65,7 +65,7 @@ class Core
         $this->registerPhalconDi();
         $this->preHandle();
         Event::getInstance()->frameInitialize();
-//        $this->sysDirectoryInit();
+        $this->sysDirectoryInit();
         Event::getInstance()->frameInitialized();
         $this->registerErrorHandler();
         return $this;
@@ -77,20 +77,20 @@ class Core
         defined('USER_GROUP') or define('USER_GROUP',trim(shell_exec('groups '.USER)));
     }
     private function sysDirectoryInit(){
-        //创建临时目录
-        $tempDir = Di::getInstance()->get(SysConst::TEMP_DIRECTORY);
-        if(empty($tempDir)){
-            $tempDir = ROOT."/Temp";
-            Di::getInstance()->set(SysConst::TEMP_DIRECTORY,$tempDir);
-        }
-        if(!File::createDir($tempDir)){
-            die("create Temp Directory:{$tempDir} fail");
-        }else{
-            //创建默认Session存储目录
-            $path = $tempDir."/Session";
-            File::createDir($path);
-            Di::getInstance()->set(SysConst::SESSION_SAVE_PATH,$path);
-        }
+//        //创建临时目录
+//        $tempDir = Di::getInstance()->get(SysConst::TEMP_DIRECTORY);
+//        if(empty($tempDir)){
+//            $tempDir = ROOT."/Temp";
+//            Di::getInstance()->set(SysConst::TEMP_DIRECTORY,$tempDir);
+//        }
+//        if(!File::createDir($tempDir)){
+//            die("create Temp Directory:{$tempDir} fail");
+//        }else{
+//            //创建默认Session存储目录
+//            $path = $tempDir."/Session";
+//            File::createDir($path);
+//            Di::getInstance()->set(SysConst::SESSION_SAVE_PATH,$path);
+//        }
         //创建日志目录
         $logDir = Di::getInstance()->get(SysConst::LOG_DIRECTORY);
         if(empty($logDir)){
