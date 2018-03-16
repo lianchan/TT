@@ -20,21 +20,13 @@ use Core\Http\Request as HttpRequest;
 use Core\Http\Response as HttpResponse;
 use Core\Swoole\Pipe\Dispatcher as PipeDispatcher;
 
-use Phalcon\Mvc\Application as PhalconApplication;
-use Phalcon\Config\Adapter\Ini as PhalconConfigIni;
-
-use Core\Phalcon\Session as PhalconSession;
-use Core\Phalcon\Cookies as PhalconCookies;
-use Core\Phalcon\Events as PhalconEvents;
-use Core\Phalcon\Config as PhalconConfig;
-
 class Server
 {
     protected static $instance;
     protected $swooleServer;
     protected $isStart = 0;
     protected $phalconApplication;
-    /*
+    /**
      * 仅仅用于获取一个服务实例
      * @return Server
      */
@@ -61,56 +53,6 @@ class Server
 
     function isStart(){
         return $this->isStart;
-    }
-
-    /**
-     * 注册 phalcon application
-     */
-    function registerPhalconApplication(){
-        try {
-            /**
-             * Read the configuration
-             */
-            $config = new PhalconConfigIni(APP_PATH . 'config/config.ini');
-            if (is_readable(APP_PATH . 'config/config.ini.dev')) {
-                $override = new PhalconConfigIni(APP_PATH . 'config/config.ini.dev');
-                $config->merge($override);
-            }
-            /**
-             * Auto-loader configuration
-             */
-            require APP_PATH . 'config/loader.php';
-            /**
-             * Load application services
-             */
-            require APP_PATH . 'config/services.php';
-            $this->phalconApplication = new PhalconApplication($di);
-            $this->phalconApplication->setEventsManager($eventsManager);
-
-        } catch (\Exception $e){
-            echo $e->getMessage();
-            echo $e->getTraceAsString();
-        }
-    }
-
-    function registerPhalconDi(){
-        $di = $this->phalconApplication->getDI();
-        PhalconConfig::register($di);
-        PhalconEvents::register($di);
-        PhalconCookies::register($di);
-        PhalconSession::register($di);
-//        PhalconSession::start();
-        PhalconEvents::attach('router:matchedRoute', function (\Phalcon\Events\Event $event) {
-            var_dump('session_id --> '.PhalconSession::getId());
-//                $this->debugData['session-id'] = json_encode(Session::getId());
-//                $this->debugData['session-data'] = json_encode(isset($_SESSION) ? $_SESSION : null);
-        });
-//            Events::attach('router:after_dispatch', function (Event $event) {
-//                var_dump('router:after_dispatch');
-//                var_dump(PhalconSession::getId());
-////                $this->debugData['session-id'] = json_encode(Session::getId());
-////                $this->debugData['session-data'] = json_encode(isset($_SESSION) ? $_SESSION : null);
-//            });
     }
 
     /*
@@ -143,21 +85,26 @@ class Server
         return $this->swooleServer;
     }
     /**
+     * 设置 phalcon mvc application
+     * @param $phalconApplication
+     */
+    function setPhalconApplication($phalconApplication){
+        if ($this->phalconApplication){
+            return;
+        }
+        $this->phalconApplication = $phalconApplication;
+    }
+    /**
      * 获取 phalcon mvc application
      * @return \Phalcon\Mvc\Application
      */
     function getPhalconApplication(){
         return $this->phalconApplication;
     }
-    /*
+    /**
      * 监听http请求
      */
     private function listenRequest(){
-
-//        $request2 = HttpRequest::getInstance();
-//        $response2 = HttpResponse::getInstance();
-//        $response2->session();
-
         $this->getServer()->on("request",
             function (\swoole_http_request $request,\swoole_http_response $response){
 

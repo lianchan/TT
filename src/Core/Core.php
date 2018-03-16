@@ -22,10 +22,19 @@ use Core\Http\Response;
 use Core\Swoole\Server;
 use Core\Utility\File;
 
+use Phalcon\Mvc\Application as PhalconApplication;
+use Phalcon\Config\Adapter\Ini as PhalconConfigIni;
+
+use Core\Phalcon\Session as PhalconSession;
+use Core\Phalcon\Cookies as PhalconCookies;
+use Core\Phalcon\Events as PhalconEvents;
+use Core\Phalcon\Config as PhalconConfig;
+
 class Core
 {
     protected static $instance;
     private $preCall;
+    private $phalconApplication;
     function __construct($preCall)
     {
         $this->preCall = $preCall;
@@ -39,8 +48,7 @@ class Core
     }
 
     function run(){
-        Server::getInstance()->registerPhalconApplication();
-        Server::getInstance()->registerPhalconDi();
+        Server::getInstance()->setPhalconApplication($this->phalconApplication);
         Server::getInstance()->startServer();
     }
 
@@ -53,6 +61,8 @@ class Core
         }
         $this->defineSysConst();
         $this->registerAutoLoader();
+        $this->registerPhalconApplication();
+        $this->registerPhalconDi();
         $this->preHandle();
         Event::getInstance()->frameInitialize();
 //        $this->sysDirectoryInit();
@@ -105,6 +115,53 @@ class Core
             ]
         );
         $loader->register();
+    }
+
+    /**
+     * 注册 phalcon application
+     */
+    function registerPhalconApplication(){
+        try {
+            /**
+             * Read the configuration
+             */
+            $config = new PhalconConfigIni(APP_PATH . 'config/config.ini');
+            if (is_readable(APP_PATH . 'config/config.ini.dev')) {
+                $override = new PhalconConfigIni(APP_PATH . 'config/config.ini.dev');
+                $config->merge($override);
+            }
+            /**
+             * Auto-loader configuration
+             */
+            require APP_PATH . 'config/loader.php';
+            /**
+             * Load application services
+             */
+            require APP_PATH . 'config/services.php';
+            $this->phalconApplication = new PhalconApplication($di);
+            $this->phalconApplication->setEventsManager($eventsManager);
+        } catch (\Exception $e){
+            echo $e->getMessage();
+            echo $e->getTraceAsString();
+        }
+    }
+
+    function registerPhalconDi(){
+        if (!$this->phalconApplication) {
+            return;
+        }
+        $di = $this->phalconApplication->getDI();
+        Di::getInstance()->setPhalconAppDi($di);
+//        PhalconConfig::register($di);
+//        PhalconEvents::register($di);
+//        PhalconCookies::register($di);
+//        PhalconSession::register($di);
+////        PhalconSession::start();
+//        PhalconEvents::attach('router:matchedRoute', function (\Phalcon\Events\Event $event) use($di) {
+//            var_dump('session_id --> '.PhalconSession::getId());
+////                $this->debugData['session-id'] = json_encode(Session::getId());
+////                $this->debugData['session-data'] = json_encode(isset($_SESSION) ? $_SESSION : null);
+//        });
     }
 
     private function registerErrorHandler(){

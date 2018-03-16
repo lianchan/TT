@@ -52,7 +52,6 @@ class Response extends HttpResponse
                 }
             }
             $cookies = $this->getCookies();
-            var_dump($cookies);
             foreach ($cookies as $cookie){
                 $this->swoole_http_response->cookie($cookie->getName(),$cookie->getValue(),$cookie->getExpire(),$cookie->getPath(),$cookie->getDomain(),$cookie->getSecure(),$cookie->getHttponly());
             }
@@ -129,7 +128,6 @@ class Response extends HttpResponse
             trigger_error("response has end");
             return false;
         }
-
     }
     function forward($pathTo,array $attribute = array()){
         $pathTo = UrlParser::pathInfo($pathTo);
@@ -150,13 +148,6 @@ class Response extends HttpResponse
             trigger_error("response has end");
         }
     }
-
-//    function session(){
-//        if(!isset($this->session)){
-//            $this->session = Di::getInstance()->get('session');
-//        }
-//        return $this->session;
-//    }
 
     function session(){
         if(!isset($this->session)){

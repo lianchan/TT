@@ -49,12 +49,20 @@ class Dispatcher
         $request2 = $request->getSwooleRequest();
         $phalconApplication = Server::getInstance()->getPhalconApplication();
 
-        $cache = $phalconApplication->getDI()->get('cacheMemcache');
+//        $cache = $phalconApplication->getDI()->get('cacheMemcache');
 //        $cache->save("my-data", [1, 2, 3, 4, 5]);
-        $data = $cache->get("my-data");
-        var_dump($data);
+//        $data = $cache->get("my-data");
+//        var_dump($data);
 
-//        $session = $response->session();
+        $responseSession = $response->session();
+        $session = $responseSession->set('test','goodluck');
+        var_dump($session);
+
+        $requestSession = $request->session();
+        $session = $requestSession->get('test');
+        var_dump($session);
+
+
 //        $session->set('uuid', 888);
 //        var_dump($session->get('auth'));
 //        var_dump($session->get('uuid'));
@@ -65,7 +73,7 @@ class Dispatcher
 //        $session = $di->get('session');
 //        var_dump($session);
 
-        var_dump(PhalconSession::getId());
+//        var_dump(PhalconSession::getId());
 
         //注册捕获错误函数
 //        register_shutdown_function(array($this, 'handleFatal'));

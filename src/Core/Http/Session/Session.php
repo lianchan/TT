@@ -38,7 +38,8 @@ class Session
         if($handler instanceof \SessionHandlerInterface){
             $this->sessionHandler = $handler;
         }else{
-            $this->sessionHandler = new SessionHandler();
+//            $this->sessionHandler = new SessionHandler();
+            $this->sessionHandler = Di::getInstance()->getPhalconAppDi()->get('session');
         }
         $this->init();
     }
